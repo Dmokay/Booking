@@ -59,7 +59,7 @@
         </div>
       </nav>
       <nav class="bottom-navbar">
-        <div class="container">
+        <!-- <div class="container">
 
             <ul class="nav page-navigation">
               <li class="nav-item">
@@ -90,6 +90,7 @@
               </li>
               
             </ul>
-        </div>
+            
+        </div> -->
       </nav>
     </div>

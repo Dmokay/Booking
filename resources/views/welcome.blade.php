@@ -26,21 +26,21 @@
                         <div class="col-sm-6">
                             <div class="d-flex align-items-center justify-content-md-end">
                                 <div class="pr-1 mb-3 mb-xl-0">
-                                        <button type="button" class="btn btn-outline-inverse-info btn-icon-text">
-                                            Feedback
-                                            <i class="mdi mdi-message-outline btn-icon-append"></i>                          
+                                        <button type="button" class="btn btn-rounded btn-primary btn-icon-text">
+                                            Dashboard
+                                                                      
                                         </button>
                                 </div>
                                 <div class="pr-1 mb-3 mb-xl-0">
-                                        <button type="button" class="btn btn-outline-inverse-info btn-icon-text">
-                                            Help
-                                            <i class="mdi mdi-help-circle-outline btn-icon-append"></i>                          
+                                        <button type="button" class="btn btn-rounded btn-primary btn-icon-text">
+                                            Requests
+                                                                      
                                     </button>
                                 </div>
                                 <div class="pr-1 mb-3 mb-xl-0">
-                                        <button type="button" class="btn btn-outline-inverse-info btn-icon-text">
-                                            Print
-                                            <i class="mdi mdi-printer btn-icon-append"></i>                          
+                                        <button type="button" class="btn btn-rounded btn-primary btn-icon-text">
+                                            Reports
+                                                                      
                                         </button>
                                 </div>
                             </div>
@@ -431,8 +431,8 @@
                 <footer class="footer">
           <div class="footer-wrap">
               <div class="w-100 clearfix">
-                <span class="d-block text-center text-sm-left d-sm-inline-block">Copyright © 2020 <a href="#" target="_blank">Liberty Breeze</a>. All rights reserved.</span>
-                <span class="float-none float-sm-right d-block mt-1 mt-sm-0 text-center"> Uniquely Developed with <i class="mdi mdi-heart-outline"></i></span>
+                <span class="d-block text-center text-sm-left d-sm-inline-block">Copyright © 2020 <a href="#" target="_blank"></a>.All rights reserved.</span>
+                <span class="float-none float-sm-right d-block mt-1 mt-sm-0 text-center">Liberty Breeze Global Systems</span>
               </div>
           </div>
         </footer>
