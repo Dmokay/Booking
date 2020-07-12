@@ -8,8 +8,8 @@
               <li class="nav-item ml-0 mr-5 d-lg-flex d-none">
                 <a href="#" class="nav-link horizontal-nav-left-menu"><i class="mdi mdi-format-list-bulleted"></i></a>
               </li>
-              
-              
+
+
               <li class="nav-item nav-search d-none d-lg-block ml-3">
                 <div class="input-group">
                     <div class="input-group-prepend">
@@ -19,18 +19,18 @@
                     </div>
                     <input type="text" class="form-control" placeholder="search" aria-label="search" aria-describedby="search">
                 </div>
-              </li> 
+              </li>
 
             </ul>
 
             <div class="text-center navbar-brand-wrapper d-flex align-items-center justify-content-center">
-                <a class="navbar-brand brand-logo" href="{{url('index.html')}}"><img src="{{asset('images/logo.svg')}}" alt="logo"/></a>
-                <a class="navbar-brand brand-logo-mini" href="{{url('index.html')}}"><img src="{{asset('images/logo-mini.svg')}}" alt="logo"/></a>
+                <a class="navbar-brand brand-logo" href="{{url('/')}}"><img src="{{asset('images/logo.svg')}}" alt="logo"/></a>
+                <a class="navbar-brand brand-logo-mini" href="{{url('/')}}"><img src="{{asset('images/logo-mini.svg')}}" alt="logo"/></a>
             </div>
 
             <ul class="navbar-nav navbar-nav-right">
-                
-                
+
+
                 <li class="nav-item dropdown d-lg-flex d-none">
                   <button type="button" class="btn btn-inverse-primary btn-sm">Settings</button>
                 </li>
@@ -59,38 +59,6 @@
         </div>
       </nav>
       <nav class="bottom-navbar">
-        <!-- <div class="container">
 
-            <ul class="nav page-navigation">
-              <li class="nav-item">
-                <a class="nav-link" href="{{url('index.html')}}">
-                  <i class="mdi mdi-file-document-box menu-icon"></i>
-                  <span class="menu-title">Dashboard</span>
-                </a>
-              </li>
-              <li class="nav-item">
-                  <a href="#" class="nav-link">
-                    <i class="mdi mdi-cube-outline menu-icon"></i>
-                    <span class="menu-title">Requests</span>
-                    <i class="menu-arrow"></i>
-                  </a>
-                  <div class="submenu">
-                      <ul>
-                          <li class="nav-item"><a class="nav-link" href="pages/ui-features/buttons.html">Buttons</a></li>
-                          <li class="nav-item"><a class="nav-link" href="pages/ui-features/typography.html">Typography</a></li>
-                      </ul>
-                  </div>
-              </li>
-              <li class="nav-item">
-                  <a href="{{url('pages/forms/basic_elements.html')}}" class="nav-link">
-                    <i class="mdi mdi-chart-areaspline menu-icon"></i>
-                    <span class="menu-title">Reports</span>
-                    <i class="menu-arrow"></i>
-                  </a>
-              </li>
-              
-            </ul>
-            
-        </div> -->
       </nav>
     </div>

@@ -1,7 +1,7 @@
 @extends('layouts.main')
 
 @section('content')
-       
+
     <!-- partial -->
         <div class="container-fluid page-body-wrapper">
             <div class="main-panel">
@@ -26,21 +26,26 @@
                         <div class="col-sm-6">
                             <div class="d-flex align-items-center justify-content-md-end">
                                 <div class="pr-1 mb-3 mb-xl-0">
-                                        <button type="button" class="btn btn-rounded btn-primary btn-icon-text">
-                                            Dashboard
-                                                                      
+                                        <button type="button" class="btn btn-rounded btn-warning btn-icon-text">
+
+                                            <a href="{{route('report')}}" >Dashboard</a>
+
                                         </button>
                                 </div>
                                 <div class="pr-1 mb-3 mb-xl-0">
-                                        <button type="button" class="btn btn-rounded btn-primary btn-icon-text">
-                                            Requests
-                                                                      
+                                        <button type="button" class="btn btn-rounded btn-warning btn-icon-text">
+
+                                            <a href="{{route('request')}}" >Requests</a>
+
+
                                     </button>
                                 </div>
                                 <div class="pr-1 mb-3 mb-xl-0">
-                                        <button type="button" class="btn btn-rounded btn-primary btn-icon-text">
-                                            Reports
-                                                                      
+                                        <button type="button" class="btn btn-rounded btn-warning btn-icon-text">
+
+                                            <a href="{{route('report')}}" >Reports</a>
+
+
                                         </button>
                                 </div>
                             </div>
@@ -108,11 +113,11 @@
                         <div class="col-lg-4 mb-3 mb-lg-0">
                             <div class="card congratulation-bg text-center">
                                 <div class="card-body pb-0">
-                                    <img src="{{asset('images/dashboard/face29.png')}}" alt="">  
+                                    <img src="{{asset('images/dashboard/face29.png')}}" alt="">
                                     <h2 class="mt-3 text-white mb-3 font-weight-bold">Congratulations
                                         Johnson
                                     </h2>
-                                    <p>You have done 57.6% more sales today. 
+                                    <p>You have done 57.6% more sales today.
                                         Check your new badge in your profile.
                                     </p>
                                 </div>
@@ -441,6 +446,6 @@
             <!-- main-panel ends -->
         </div>
         <!-- page-body-wrapper ends -->
-    
-       
+
+
  @endsection
