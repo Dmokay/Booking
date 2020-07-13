@@ -2,7 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Booking;
+use App\Service;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 
 class RequestsController extends Controller
 {
@@ -13,7 +16,8 @@ class RequestsController extends Controller
      */
     public function index()
     {
-      return view('Request.requests');
+        $bookings = Booking::latest()->paginate(100);
+        return view('Request.requests', compact('bookings'));
     }
 
     /**
@@ -23,24 +27,34 @@ class RequestsController extends Controller
      */
     public function create()
     {
-        //
+        $services = Service::where('status', 1)->orderBy('when')->get();
+        return view('Request.request-attendance', compact('services'));
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
     {
-        //
+        $request_id = Str::uuid()->toString();
+        foreach ($request->names as $index => $attendee) {
+            Booking::create([
+                'request_id' => $request_id,
+                'names' => $attendee,
+                'phone' => $request->phone[$index],
+                'service_id' => $request->service_id
+            ]);
+        }
+        return redirect()->back()->withStatus("Request Successfully Received");
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function show($id)
@@ -51,7 +65,7 @@ class RequestsController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
@@ -62,8 +76,8 @@ class RequestsController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param \Illuminate\Http\Request $request
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
@@ -74,11 +88,30 @@ class RequestsController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
     {
         //
+    }
+
+    public function approve_request($id, Request $request)
+    {
+        $booking = Booking::with('service')->findOrFail($id);
+        $approved = $booking->service->approved->count();
+        if ($approved >= 100) {
+            return redirect()->back()->withError("Maximum Approval limit reached!");
+        }
+
+        $related_bookings = Booking::where('request_id', $booking->request_id)->get();
+        foreach ($related_bookings as $attendee) {
+            if ($request->status == 1) {
+                $attendee->update(['status' => Booking::STATUS_APPROVED]);
+            } elseif ($request->status == -1){
+                $attendee->update(['status' => Booking::STATUS_REJECTED]);
+            }
+        }
+        return redirect()->back()->withStatus("Successfully approved!");
     }
 }

@@ -15,6 +15,12 @@ class CreateBookingsTable extends Migration
     {
         Schema::create('bookings', function (Blueprint $table) {
             $table->id();
+            $table->bigInteger('service_id');
+            $table->string('request_id')->nullable();
+            $table->string('names');
+            $table->string('phone');
+            $table->integer('status')->default(0); //0 for pending approval;1for approved;-1 for rejected
+            $table->string('seat')->nullable();
             $table->timestamps();
         });
     }
