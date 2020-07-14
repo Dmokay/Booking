@@ -27,8 +27,7 @@ class RequestsController extends Controller
      */
     public function create()
     {
-        $services = Service::where('status', 1)->orderBy('when')->get();
-        return view('Request.request-attendance', compact('services'));
+        return view('Request.create');
     }
 
     /**

@@ -10,7 +10,7 @@
                         <div class="card">
                             <div class="card-body">
                                 <h4 class="card-title">
-                                    Requests
+                                    Services
                                     <a href="{{route('requests.create')}}" class="btn btn-sm btn-primary pull-right">Create Request</a>
                                 </h4>
                                 <div class="table-responsive">
@@ -26,19 +26,23 @@
                                         </tr>
                                         </thead>
                                         <tbody>
-                                        @foreach($bookings as $booking)
+                                        @foreach($requests as $request)
                                             <tr>
-                                                <td>{{$booking->names}}</td>
-                                                <td>{{$booking->phone}}</td>
-                                                <td>{{$booking->service->title}}</td>
+                                                <td>{{$request->name}}</td>
+                                                <td>{{$request->phone_no}}</td>
+                                                <td>{{$request->service}}</td>
                                                 <td>100 attendees</td>
                                                 <td>
-                                                <td>{{$booking->status}}</td>
+                                                    {{$request->approved->count()." approved from ".$request->bookings->count(). " Requests"}}</td>
+                                                <td>
+                                                    <label class="badge {{$request->status ? 'badge-success': 'badge-danger'}}">
+                                                        {{$request->status ? 'active': 'inactive'}}
+                                                    </label>
                                                 </td>
                                                 <td>
-                                                <td>{{$booking->action}}</td>
+                                                    <a href="{{route('requests.show', $request->id)}}"><i class="mdi mdi-arrow-expand"></i> </a>
+                                                    <a href="" style="color: red"><i class="mdi mdi-bookmark-remove"></i> </a>
                                                 </td>
-
                                             </tr>
                                         @endforeach
                                         </tbody>

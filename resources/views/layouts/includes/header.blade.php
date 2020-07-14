@@ -30,10 +30,6 @@
 
             <ul class="navbar-nav navbar-nav-right">
 
-
-                <li class="nav-item dropdown d-lg-flex d-none">
-                  <button type="button" class="btn btn-inverse-primary btn-sm">Settings</button>
-                </li>
                 <li class="nav-item nav-profile dropdown">
                   <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown" id="profileDropdown">
                     <span class="nav-profile-name">Johnson</span>

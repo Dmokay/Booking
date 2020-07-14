@@ -11,7 +11,7 @@
             <div class="pr-1 mb-3 mb-xl-0">
                 <button type="button" class="btn btn-rounded btn-warning btn-icon-text">
 
-                    <a href="{{route('report')}}" >Dashboard</a>
+                    <a href="{{url('/')}}" >Dashboard</a>
 
                 </button>
             </div>
@@ -27,6 +27,14 @@
                 <button type="button" class="btn btn-rounded btn-warning btn-icon-text">
 
                     <a href="{{route('requests.index')}}">Attendance Requests</a>
+
+
+                </button>
+            </div>
+            <div class="pr-1 mb-3 mb-xl-0">
+                <button type="button" class="btn btn-rounded btn-warning btn-icon-text">
+
+                    <a href="{{route('users.index')}}">Users</a>
 
 
                 </button>

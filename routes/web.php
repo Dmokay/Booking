@@ -26,3 +26,4 @@ Route::get('/attendance-request', 'RequestsController@create');
 Route::get('/approve-request/{id}', 'RequestsController@approve_request')->name('approve_request');
 Route::resource('/requests', 'RequestsController');
 Route::resource('/services', 'ServicesController');
+Route::resource('/users', 'UsersController');
