@@ -34,6 +34,12 @@
             <div class="card-heading"></div>
             <div class="card-body">
                 <h2 class="title">Register Below</h2>
+                @if (session('status'))
+                    <div class="row"
+                         style="margin: 20px;width: 100%;background-color: green;border: 1px solid darkgreen">
+                        {{session('status')}}
+                    </div>
+                @endif
                 <form method="POST" action="{{route('requests.store')}}">
                     @csrf
                     <div class="input-group">
@@ -102,10 +108,10 @@
         $('.replica').empty();
         if (count_value == 1)
             $('.replica').append($('.elm').clone().removeClass("elm"))
-        else if (count_value == 2){
+        else if (count_value == 2) {
             $('.replica').append($('.elm').clone().removeClass("elm"));
             $('.replica').append($('.elm').clone().removeClass("elm"));
-        } else if (count_value == 3){
+        } else if (count_value == 3) {
             $('.replica').append($('.elm').clone().removeClass("elm"))
             $('.replica').append($('.elm').clone().removeClass("elm"))
             $('.replica').append($('.elm').clone().removeClass("elm"))

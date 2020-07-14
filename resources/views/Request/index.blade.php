@@ -19,6 +19,7 @@
                                             <tr>
                                                 <th>Name</th>
                                                 <th>Phone</th>
+                                                <th>Service</th>
                                                 <th>Attendees</th>
                                                 <th>Status</th>
                                                 <th>Requested At</th>
@@ -30,6 +31,7 @@
                                                 <tr>
                                                     <td>{{$booking->names}}</td>
                                                     <td>{{$booking->phone}}</td>
+                                                    <td>{{$booking->service->title}}</td>
                                                     <td>{{$booking->count}}</td>
                                                     <td>
                                                         @if($booking->status == 0)

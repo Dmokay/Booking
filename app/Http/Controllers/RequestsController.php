@@ -18,7 +18,7 @@ class RequestsController extends Controller
     public function index()
     {
         $bookings = Booking::select(DB::raw('count(*) as count'), 'names', 'phone', 'status', 'created_at', 'id', 'service_id')
-            ->groupBy('request_id')->paginate(100);
+            ->with('service')->groupBy('request_id')->orderBy('created_at', 'desc')->paginate(100);
         return view('Request.index', compact('bookings'));
     }
 
@@ -29,7 +29,8 @@ class RequestsController extends Controller
      */
     public function create()
     {
-        return view('Request.create');
+        $services = Service::where('status', true)->orderBy('when')->get();
+        return view('Request.request-attendance', compact('services'));
     }
 
     /**
