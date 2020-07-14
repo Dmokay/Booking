@@ -41,4 +41,5 @@
             </div>
         </div>
     </div>
+    @include('layouts.includes._flash')
 </div>

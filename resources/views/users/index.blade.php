@@ -11,7 +11,8 @@
                             <div class="card-body">
                                 <h4 class="card-title">
                                     Users
-                                    <a href="{{route('users.create')}}" class="btn btn-sm btn-primary pull-right">Create User</a>
+                                    <a href="{{route('users.create')}}" class="btn btn-sm btn-primary pull-right">Create
+                                        User</a>
                                 </h4>
                                 <div class="table-responsive">
                                     <table class="table table-hover">
@@ -20,40 +21,31 @@
                                             <th style="font-weight: bolder">Name</th>
                                             <th style="font-weight: bolder">Email</th>
                                             <th style="font-weight: bolder">Status</th>
+                                            <th style="font-weight: bolder">Created At</th>
                                             <th style="font-weight: bolder">Actions</th>
                                         </tr>
                                         </thead>
                                         <tbody>
-                                        <tr>
-                                            <td>Jacob</td>
-                                            <td>53275531</td>
-                                            <td>12 May 2017</td>
-                                            <td><label class="badge badge-danger">Pending</label></td>
-                                        </tr>
-                                        <tr>
-                                            <td>Messsy</td>
-                                            <td>53275532</td>
-                                            <td>15 May 2017</td>
-                                            <td><label class="badge badge-warning">In progress</label></td>
-                                        </tr>
-                                        <tr>
-                                            <td>John</td>
-                                            <td>53275533</td>
-                                            <td>14 May 2017</td>
-                                            <td><label class="badge badge-info">Fixed</label></td>
-                                        </tr>
-                                        <tr>
-                                            <td>Peter</td>
-                                            <td>53275534</td>
-                                            <td>16 May 2017</td>
-                                            <td><label class="badge badge-success">Completed</label></td>
-                                        </tr>
-                                        <tr>
-                                            <td>Dave</td>
-                                            <td>53275535</td>
-                                            <td>20 May 2017</td>
-                                            <td><label class="badge badge-warning">In progress</label></td>
-                                        </tr>
+                                        @foreach($users as $user)
+                                            <tr>
+                                                <td>{{$user->name}}</td>
+                                                <td>{{$user->email}}</td>
+                                                <td>
+                                                    <label
+                                                        class="badge {{$user->status ? 'badge-success':  'badge-error'}}">
+                                                        {{$user->status ? 'active':  'suspended'}}
+                                                    </label>
+                                                </td>
+                                                <td>{{$user->created_at}}</td>
+                                                <td>
+                                                    @if($user->status)
+                                                        <a href="#"><i class="mdi mdi-delete" style="color: red"></i></a>
+                                                    @else
+                                                        <a href="#"><i class="mdi mdi-check" style="color: green"></i></a>
+                                                    @endif
+                                                </td>
+                                            </tr>
+                                        @endforeach
                                         </tbody>
                                     </table>
                                 </div>

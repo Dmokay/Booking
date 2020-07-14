@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\CreateUserRequest;
+use App\User;
 use Illuminate\Http\Request;
 
 class UsersController extends Controller
@@ -13,7 +15,8 @@ class UsersController extends Controller
      */
     public function index()
     {
-        return view('users.index');
+        $users = User::latest()->get();
+        return view('users.index', compact('users'));
     }
 
     /**
@@ -32,9 +35,10 @@ class UsersController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(CreateUserRequest $request)
     {
-        //
+        $user = User::create($request->all());
+        return  redirect()->route('users.index')->withStatus("User Successfully Added!");
     }
 
     /**

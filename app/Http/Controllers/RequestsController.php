@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Booking;
 use App\Service;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
 
 class RequestsController extends Controller
@@ -16,8 +17,9 @@ class RequestsController extends Controller
      */
     public function index()
     {
-        $bookings = Booking::latest()->paginate(100);
-        return view('Request.requests', compact('bookings'));
+        $bookings = Booking::select(DB::raw('count(*) as count'), 'names', 'phone', 'status', 'created_at', 'id', 'service_id')
+            ->groupBy('request_id')->paginate(100);
+        return view('Request.index', compact('bookings'));
     }
 
     /**
@@ -107,7 +109,7 @@ class RequestsController extends Controller
         foreach ($related_bookings as $attendee) {
             if ($request->status == 1) {
                 $attendee->update(['status' => Booking::STATUS_APPROVED]);
-            } elseif ($request->status == -1){
+            } elseif ($request->status == -1) {
                 $attendee->update(['status' => Booking::STATUS_REJECTED]);
             }
         }

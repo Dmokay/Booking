@@ -13,27 +13,27 @@
                                 <p class="card-description">
 
                                 </p>
-                                <form class="forms-sample" action="" method="post">
+                                <form class="forms-sample" action="{{route('users.store')}}" method="post">
                                     @csrf
                                     <div class="form-group">
-                                        <label for="exampleInputUsername1">Name</label>
-                                        <input type="text" class="form-control" name="name" id="exampleInputUsername1"
-                                               placeholder="Name">
+                                        <label>Name</label>
+                                        <input type="text" class="form-control" required name="name" placeholder="Name"
+                                        value="{{old('name')}}">
                                     </div>
                                     <div class="form-group">
-                                        <label for="exampleInputEmail3">Email address</label>
-                                        <input type="email" class="form-control" id="exampleInputEmail3" placeholder="Email">
+                                        <label>Email address</label>
+                                        <input type="email" class="form-control" required name="email" placeholder="Email"
+                                               value="{{old('email')}}">
                                     </div>
                                     <div class="form-group">
-                                        <label for="exampleInputPassword4">Password</label>
-                                        <input type="password" class="form-control" id="exampleInputPassword4" placeholder="Password">
+                                        <label>Password</label>
+                                        <input type="password" class="form-control" required name="password" placeholder="Password">
                                     </div>
                                     <div class="form-group">
-                                        <label for="exampleInputPassword4">Re-enter Password</label>
-                                        <input type="password" class="form-control" id="exampleInputPassword4" placeholder="Re-Password">
+                                        <label>Re-enter Password</label>
+                                        <input type="password" class="form-control" required name="password_confirmation" placeholder="Re-Password">
                                     </div>
                                     <button type="submit" class="btn btn-primary mr-2">Submit</button>
-                                    <button class="btn btn-light">Cancel</button>
                                 </form>
                             </div>
                         </div>

@@ -32,19 +32,24 @@
 
                 <li class="nav-item nav-profile dropdown">
                   <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown" id="profileDropdown">
-                    <span class="nav-profile-name">Johnson</span>
+                    <span class="nav-profile-name">{{\Illuminate\Support\Facades\Auth::user()->name}}</span>
                     <span class="online-status"></span>
                     <img src="{{asset('images/faces/face28.png')}}" alt="profile"/>
                   </a>
                   <div class="dropdown-menu dropdown-menu-right navbar-dropdown" aria-labelledby="profileDropdown">
-                      <a class="dropdown-item">
+                      <a class="dropdown-item" href="{{route('users.index')}}">
                         <i class="mdi mdi-settings text-primary"></i>
-                        Settings
+                        Users
                       </a>
-                      <a class="dropdown-item">
+                      <a class="dropdown-item" href="{{ route('logout') }}"
+                         onclick="event.preventDefault();
+                                                     document.getElementById('logout-form').submit();">
                         <i class="mdi mdi-logout text-primary"></i>
                         Logout
                       </a>
+                      <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                          @csrf
+                      </form>
                   </div>
                 </li>
             </ul>

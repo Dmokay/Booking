@@ -13,17 +13,17 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
-
-Auth::routes();
-
-Route::get('/home', 'HomeController@index')->name('home');
-Route::get('/report', 'ReportsController@index')->name('report');
-Route::post('/attendance-request', 'RequestsController@store')->name("store_request");
+Auth::routes(['register'=>false]);
 Route::get('/attendance-request', 'RequestsController@create');
-Route::get('/approve-request/{id}', 'RequestsController@approve_request')->name('approve_request');
-Route::resource('/requests', 'RequestsController');
-Route::resource('/services', 'ServicesController');
-Route::resource('/users', 'UsersController');
+Route::group(['middleware' => ['auth']], function () {
+    Route::get('/', function () {
+        return redirect()->route('home');
+    });
+    Route::get('/home', 'HomeController@index')->name('home');
+    Route::get('/report', 'ReportsController@index')->name('report');
+    Route::post('/attendance-request', 'RequestsController@store')->name("store_request");
+    Route::get('/approve-request/{id}', 'RequestsController@approve_request')->name('approve_request');
+    Route::resource('/requests', 'RequestsController');
+    Route::resource('/services', 'ServicesController');
+    Route::resource('/users', 'UsersController');
+});

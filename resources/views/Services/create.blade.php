@@ -16,14 +16,19 @@
                                 <form class="forms-sample" action="{{route('services.store')}}" method="post">
                                     @csrf
                                     <div class="form-group">
-                                        <label for="exampleInputUsername1">Title</label>
-                                        <input type="text" class="form-control" name="title" id="exampleInputUsername1"
+                                        <label for="exampleInputUsername1">Title*</label>
+                                        <input type="text" class="form-control" required name="title" id="exampleInputUsername1"
                                                placeholder="Title">
                                     </div>
                                     <div class="form-group">
-                                        <label for="exampleInputUsername1">When</label>
+                                        <label for="exampleInputUsername1">When*</label>
                                         <input type="text" class="form-control" name="when" id="dated"
-                                               placeholder="When" data-toggle="datetimepicker" data-target="#dated">
+                                               placeholder="When" required data-toggle="datetimepicker" data-target="#dated">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="exampleInputUsername1">Max Attendees*</label>
+                                        <input type="number" class="form-control" required name="count"
+                                               placeholder="Max Attendees">
                                     </div>
                                     <div class="form-group">
                                         <label for="exampleInputEmail1">Description</label>

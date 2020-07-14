@@ -10,43 +10,52 @@
                         <div class="card">
                             <div class="card-body">
                                 <h4 class="card-title">
-                                    Services
-                                    <a href="{{route('requests.create')}}" class="btn btn-sm btn-primary pull-right">Create Request</a>
+                                    Service Requests
                                 </h4>
                                 <div class="table-responsive">
-                                    <table class="table table-hover">
-                                        <thead>
-                                        <tr>
-                                            <th style="font-weight: bolder">Name</th>
-                                            <th style="font-weight: bolder">Phone No</th>
-                                            <th style="font-weight: bolder">Service</th>
-                                            <th style="font-weight: bolder">Max Attendance per Service</th>
-                                            <th style="font-weight: bolder">Status</th>
-                                            <th style="font-weight: bolder">Actions</th>
-                                        </tr>
-                                        </thead>
-                                        <tbody>
-                                        @foreach($requests as $request)
+                                    <div class="table-responsive">
+                                        <table class="table table-hover">
+                                            <thead>
                                             <tr>
-                                                <td>{{$request->name}}</td>
-                                                <td>{{$request->phone_no}}</td>
-                                                <td>{{$request->service}}</td>
-                                                <td>100 attendees</td>
-                                                <td>
-                                                    {{$request->approved->count()." approved from ".$request->bookings->count(). " Requests"}}</td>
-                                                <td>
-                                                    <label class="badge {{$request->status ? 'badge-success': 'badge-danger'}}">
-                                                        {{$request->status ? 'active': 'inactive'}}
-                                                    </label>
-                                                </td>
-                                                <td>
-                                                    <a href="{{route('requests.show', $request->id)}}"><i class="mdi mdi-arrow-expand"></i> </a>
-                                                    <a href="" style="color: red"><i class="mdi mdi-bookmark-remove"></i> </a>
-                                                </td>
+                                                <th>Name</th>
+                                                <th>Phone</th>
+                                                <th>Attendees</th>
+                                                <th>Status</th>
+                                                <th>Requested At</th>
+                                                <th>Actions</th>
                                             </tr>
-                                        @endforeach
-                                        </tbody>
-                                    </table>
+                                            </thead>
+                                            <tbody>
+                                            @foreach($bookings as $booking)
+                                                <tr>
+                                                    <td>{{$booking->names}}</td>
+                                                    <td>{{$booking->phone}}</td>
+                                                    <td>{{$booking->count}}</td>
+                                                    <td>
+                                                        @if($booking->status == 0)
+                                                            <label class="badge badge-info">pending</label>
+                                                        @elseif($booking->status == 1)
+                                                            <label class="badge badge-success">approved</label>
+                                                        @else
+                                                            <label class="badge badge-danger">rejected</label>
+                                                        @endif
+                                                    </td>
+                                                    <td>{{$booking->created_at}}</td>
+                                                    <td>
+                                                        @if($booking->status != 1)
+                                                            <a href="{{route('approve_request', [$booking->id, 'status'=>1])}}"
+                                                               style="color: green">approve</a> |
+                                                        @endif
+                                                        @if($booking->status != -1)
+                                                            <a href="{{route('approve_request', [$booking->id, 'status'=>-1])}}"
+                                                               style="color: red">reject</a>
+                                                        @endif
+                                                    </td>
+                                                </tr>
+                                            @endforeach
+                                            </tbody>
+                                        </table>
+                                    </div>
                                 </div>
                             </div>
                         </div>

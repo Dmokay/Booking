@@ -32,7 +32,7 @@
                                                 <td>{{$service->title}}</td>
                                                 <td>{{$service->description}}</td>
                                                 <td>{{$service->when}}</td>
-                                                <td>100 attendees</td>
+                                                <td>{{$service->count}} attendees</td>
                                                 <td>
                                                     {{$service->approved->count()." approved from ".$service->bookings->count(). " Requests"}}</td>
                                                 <td>
