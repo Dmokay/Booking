@@ -46,12 +46,43 @@
                                                     <td>
                                                         @if($booking->status != 1)
                                                             <a href="{{route('approve_request', [$booking->id, 'status'=>1])}}"
-                                                               style="color: green">approve</a> |
+                                                               style="color: green">approve</a>
+                                                            <!-- Modal -->
+                                                            <div class="modal fade" id="booking_1{{$booking->id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                                <div class="modal-dialog" role="document">
+                                                                    <div class="modal-content">
+                                                                        <div class="modal-header">
+                                                                            <h5 class="modal-title" id="exampleModalLabel">You are about to update a record</h5>
+                                                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                                <span aria-hidden="true">&times;</span>
+                                                                            </button>
+                                                                        </div>
+                                                                        <form method="post" action="{{route('approve_request', $booking->id)}}">
+
+                                                                            @csrf
+                                                                            {{ method_field('UPDATE') }}
+
+                                                                            <div class="modal-body">
+                                                                                ...
+                                                                            </div>
+                                                                            <div class="modal-footer">
+                                                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                                                                <button type="submit" class="btn btn-danger">Update</button>
+                                                                            </div>
+
+                                                                        </form>
+
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+
                                                         @endif
                                                         @if($booking->status != -1)
                                                             <a href="{{route('approve_request', [$booking->id, 'status'=>-1])}}"
                                                                style="color: red">reject</a>
                                                         @endif
+
+
                                                     </td>
                                                 </tr>
                                             @endforeach
@@ -67,3 +98,9 @@
         </div>
     </div>
 @endsection
+
+
+
+
+
+

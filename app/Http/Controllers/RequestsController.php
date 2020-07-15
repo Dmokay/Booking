@@ -114,6 +114,6 @@ class RequestsController extends Controller
                 $attendee->update(['status' => Booking::STATUS_REJECTED]);
             }
         }
-        return redirect()->back()->withStatus("Successfully approved!");
+        return redirect()->back()->withStatus("Request updated!");
     }
 }
