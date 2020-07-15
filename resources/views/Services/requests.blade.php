@@ -47,8 +47,8 @@
                                                 </select>
                                             </div>
                                             <div class="form-group col-md-3">
-                                                <label for="exampleInputUsername1">search</label>
-                                                <button type="submit" class="btn btn-primary mr-2 form-control">Submit
+                                                <label for="exampleInputUsername1">Search</label>
+                                                <button type="submit" class="btn btn-primary mr-2 form-control">Search
                                                 </button>
                                             </div>
                                         </div>
