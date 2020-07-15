@@ -52,18 +52,28 @@ class ServicesController extends Controller
     public function show(Request $request, $id)
     {
         $service = Service::findOrFail($id);
-        if (isset($request->tab) && $request->tab == "requested"){
+        if (isset($request->tab) && $request->tab == "requested") {
             $data = Booking::select(DB::raw('count(*) as count'), 'names', 'phone', 'status', 'created_at', 'id')
-                ->where('service_id', $id)->whereNotIn('status', [Booking::STATUS_APPROVED])->latest()
-                ->groupBy('request_id')->paginate(100);
+                ->where('service_id', $id)->whereNotIn('status', [Booking::STATUS_APPROVED]);
+            if ($request->filled('phone') && $request->phone != "")
+                $data = $data->where('phone', Helper::formatNumber($request->phone));
+            if ($request->filled('names') && $request->names != "")
+                $data = $data->where('names', 'like', '%' . $request->names . '%');
+            if ($request->filled('status') && $request->status != "")
+                $data = $data->where('status', $request->status);
+            $data = $data->latest()->groupBy('request_id')->paginate(100);
             return view('Services.requests', compact('service', 'data'));
         } else {
             $data = Booking::where('service_id', $id)->where('status', Booking::STATUS_APPROVED)
                 ->orderBy('updated_at', 'desc');
-            if (isset($request->export)){
-                $file =  Helper::exportResponses($data);
+            if (isset($request->export)) {
+                $file = Helper::exportResponses($data);
                 return response()->download(storage_path("app/public/excel/$file"));
             }
+            if ($request->filled('phone') && $request->phone != "")
+                $data = $data->where('phone', Helper::formatNumber($request->phone));
+            if ($request->filled('names') && $request->names != "")
+                $data = $data->where('names', 'like', '%' . $request->names . '%');
             $data = $data->paginate(100);
             return view('Services.view', compact('service', 'data'));
         }
@@ -106,9 +116,10 @@ class ServicesController extends Controller
         //
     }
 
-    public function toggle($id){
+    public function toggle($id)
+    {
         $service = Service::findOrFail($id);
-        $service->update(['status'=>!$service->status]);
+        $service->update(['status' => !$service->status]);
         return redirect()->back()->withStatus("Service Updated!");
     }
 }

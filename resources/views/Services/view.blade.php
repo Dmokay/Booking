@@ -9,25 +9,52 @@
                     <div class="col-lg-12 grid-margin stretch-card">
                         <div class="card">
                             <div class="card-body">
-                                <h4 class="card-title">{{$service->title}} ({{$service->approved->count()}} / {{$service->count}} approved)</h4>
+                                <h4 class="card-title">{{$service->title}} ({{$service->approved->count()}}
+                                    / {{$service->count}} approved)</h4>
                                 <p class="card-description">when: <strong>{{$service->when}}</strong></p>
                                 <p class="card-description">Max Attendance: <strong>{{$service->count}}</strong></p>
                                 <ul class="nav nav-tabs" role="tablist">
                                     <li class="nav-item">
-                                        <a class="nav-link active" href="{{route('services.show', [$service->id])}}" role="tab">
+                                        <a class="nav-link active" href="{{route('services.show', [$service->id])}}"
+                                           role="tab">
                                             Approved Attendees ({{$service->approved->count()}})
                                         </a>
                                     </li>
                                     <li class="nav-item">
-                                        <a class="nav-link" href="{{route('services.show', [$service->id, 'tab'=>'requested'])}}" role="tab">
+                                        <a class="nav-link"
+                                           href="{{route('services.show', [$service->id, 'tab'=>'requested'])}}"
+                                           role="tab">
                                             Requests ({{$service->pending->count() + $service->rejected->count()}})
                                         </a>
                                     </li>
                                 </ul>
                                 <div class="col-md-12">
-                                    <div class="col-md-12" style="margin: 5px">
-                                        <a href="{{route('services.show', [$service->id, 'export'=>true])}}" class="btn btn-sm btn-primary pull-right">Export as Excel</a>
-                                    </div>
+                                    <form class="forms-sample" action="{{route('services.show', [$service->id])}}"
+                                          method="get">
+                                        <div class="row">
+                                            <div class="form-group col-md-3">
+                                                <label for="exampleInputUsername1">Phone</label>
+                                                <input type="text" class="form-control form-control-sm" name="phone"
+                                                       placeholder="Phone">
+                                            </div>
+                                            <div class="form-group col-md-3">
+                                                <label for="exampleInputUsername1">Name</label>
+                                                <input type="text" class="form-control form-control-sm" name="names"
+                                                       placeholder="Names">
+                                            </div>
+                                            <div class="form-group col-md-3">
+                                                <label for="exampleInputUsername1">search</label>
+                                                <button type="submit" class="btn btn-primary mr-2 form-control">Submit
+                                                </button>
+                                            </div>
+                                            <div class="form-group col-md-3">
+                                                <label for="exampleInputUsername1">Export</label>
+                                                <a href="{{route('services.show', [$service->id, 'export'=>true])}}"
+                                                   class="btn btn-primary mr-2 form-control">Export ALL as Excel</a>
+                                            </div>
+                                        </div>
+                                        <hr>
+                                    </form>
                                     <div class="table-responsive">
                                         <table class="table table-hover table-sm table-striped">
                                             <thead>
@@ -51,7 +78,8 @@
                                                     <td>{{$booking->created_at}}</td>
                                                     <td>{{$booking->updated_at}}</td>
                                                     <td>
-                                                        <a href="{{route('approve_request', [$booking->id, 'status'=>-1])}}" style="color: red">cancel</a>
+                                                        <a href="{{route('approve_request', [$booking->id, 'status'=>-1])}}"
+                                                           style="color: red">cancel</a>
                                                     </td>
                                                 </tr>
                                             @endforeach
