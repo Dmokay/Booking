@@ -9,8 +9,9 @@
                     <div class="col-lg-12 grid-margin stretch-card">
                         <div class="card">
                             <div class="card-body">
-                                <h4 class="card-title">{{$service->title}} ({{$service->approved->count()}} / 100 approved)</h4>
-                                <p class="card-description">on {{$service->when}}</p>
+                                <h4 class="card-title">{{$service->title}} ({{$service->approved->count()}} / {{$service->count}} approved)</h4>
+                                <p class="card-description">when: <strong>{{$service->when}}</strong></p>
+                                <p class="card-description">Max Attendance: <strong>{{$service->count}}</strong></p>
                                 <ul class="nav nav-tabs" role="tablist">
                                     <li class="nav-item">
                                         <a class="nav-link" href="{{route('services.show', [$service->id])}}" role="tab">
@@ -24,8 +25,37 @@
                                     </li>
                                 </ul>
                                 <div class="col-md-12">
+                                    <form class="forms-sample" action="{{route('services.show', [$service->id])}}" method="get">
+                                        <div class="row">
+                                            <input type="hidden" name="tab" value="requested">
+                                            <div class="form-group col-md-3">
+                                                <label for="exampleInputUsername1">Phone</label>
+                                                <input type="text" class="form-control form-control-sm" name="phone"
+                                                       placeholder="Phone">
+                                            </div>
+                                            <div class="form-group col-md-3">
+                                                <label for="exampleInputUsername1">Name</label>
+                                                <input type="text" class="form-control form-control-sm" name="names"
+                                                       placeholder="Names">
+                                            </div>
+                                            <div class="form-group col-md-3">
+                                                <label for="exampleInputUsername1">Status</label>
+                                                <select class="form-control-sm form-control" name="status">
+                                                    <option selected value="">All</option>
+                                                    <option value="0">Pending</option>
+                                                    <option value="-1">Rejected</option>
+                                                </select>
+                                            </div>
+                                            <div class="form-group col-md-3">
+                                                <label for="exampleInputUsername1">search</label>
+                                                <button type="submit" class="btn btn-primary mr-2 form-control">Submit
+                                                </button>
+                                            </div>
+                                        </div>
+                                        <hr>
+                                    </form>
                                     <div class="table-responsive">
-                                        <table class="table table-hover">
+                                        <table class="table table-hover table-striped table-sm">
                                             <thead>
                                             <tr>
                                                 <th>Name</th>
