@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Booking;
+use App\Helpers\Helper;
 use App\Service;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -41,12 +42,16 @@ class RequestsController extends Controller
      */
     public function store(Request $request)
     {
+        if (!$request->filled('service_id'))
+            return redirect()->back()->withError("Please select a service!");
+        if (!$request->filled('attendees'))
+            return redirect()->back()->withError("Please select number of attendees!");
         $request_id = Str::uuid()->toString();
         foreach ($request->names as $index => $attendee) {
             Booking::create([
                 'request_id' => $request_id,
                 'names' => $attendee,
-                'phone' => $request->phone[$index],
+                'phone' => Helper::formatNumber($request->phone[$index]),
                 'service_id' => $request->service_id
             ]);
         }
@@ -102,11 +107,10 @@ class RequestsController extends Controller
     {
         $booking = Booking::with('service')->findOrFail($id);
         $approved = $booking->service->approved->count();
-        if ($approved >= 100) {
-            return redirect()->back()->withError("Maximum Approval limit reached!");
-        }
-
         $related_bookings = Booking::where('request_id', $booking->request_id)->get();
+        if (($approved + count($related_bookings)) > $booking->service->count) {
+            return redirect()->back()->withError("Maximum Approval limit can't be exceeded!");
+        }
         foreach ($related_bookings as $attendee) {
             if ($request->status == 1) {
                 $attendee->update(['status' => Booking::STATUS_APPROVED]);
@@ -115,5 +119,12 @@ class RequestsController extends Controller
             }
         }
         return redirect()->back()->withStatus("Request updated!");
+    }
+
+    public function validate_attendance(Request $request){
+        $phone = Helper::formatNumber($request->phone);
+        $bookings = Booking::where('phone', $phone)->latest()->get();
+        $phone = $request->phone;
+        return view('Request.validate-attendance', compact('bookings', 'phone'));
     }
 }

@@ -11,21 +11,14 @@
 
 
               <li class="nav-item nav-search d-none d-lg-block ml-3">
-                <div class="input-group">
-                    <div class="input-group-prepend">
-                      <span class="input-group-text" id="search">
-                        <i class="mdi mdi-magnify"></i>
-                      </span>
-                    </div>
-                    <input type="text" class="form-control" placeholder="search" aria-label="search" aria-describedby="search">
-                </div>
+
               </li>
 
             </ul>
 
             <div class="text-center navbar-brand-wrapper d-flex align-items-center justify-content-center">
-                <a class="navbar-brand brand-logo" href="{{url('/')}}"><img src="{{asset('images/logo.svg')}}" alt="logo"/></a>
-                <a class="navbar-brand brand-logo-mini" href="{{url('/')}}"><img src="{{asset('images/logo-mini.svg')}}" alt="logo"/></a>
+                <a class="navbar-brand brand-logo" href="{{url('/')}}"><img src="{{asset('images/tandaza-logo.png')}}" alt="logo"/></a>
+                <a class="navbar-brand brand-logo-mini" href="{{url('/')}}"><img src="{{asset('images/tandaza-logo.png')}}" alt="logo"/></a>
             </div>
 
             <ul class="navbar-nav navbar-nav-right">

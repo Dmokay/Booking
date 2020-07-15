@@ -15,4 +15,17 @@ class Booking extends Model
     public function service(){
         return $this->belongsTo(Service::class, 'service_id');
     }
+
+    public function getDecodedStatusAttribute(){
+        switch ($this->status){
+            case 0:
+                return "Pending";
+            case 1:
+                return "Approved";
+            case -1:
+                return "Rejected";
+        }
+    }
+
+    protected $appends = ['decoded_status'];
 }

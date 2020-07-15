@@ -11,7 +11,8 @@
                             <div class="card-body">
                                 <h4 class="card-title">
                                     Services
-                                    <a href="{{route('services.create')}}" class="btn btn-sm btn-primary pull-right">Create Service</a>
+                                    <a href="{{route('services.create')}}" class="btn btn-sm btn-primary pull-right">Create
+                                        Service</a>
                                 </h4>
                                 <div class="table-responsive">
                                     <table class="table table-hover">
@@ -36,13 +37,19 @@
                                                 <td>
                                                     {{$service->approved->count()." approved from ".$service->bookings->count(). " Requests"}}</td>
                                                 <td>
-                                                    <label class="badge {{$service->status ? 'badge-success': 'badge-danger'}}">
+                                                    <label
+                                                        class="badge {{$service->status ? 'badge-success': 'badge-danger'}}">
                                                         {{$service->status ? 'active': 'inactive'}}
                                                     </label>
                                                 </td>
                                                 <td>
-                                                    <a href="{{route('services.show', $service->id)}}"><i class="mdi mdi-arrow-expand"></i> </a>
-                                                    <a href="" style="color: red"><i class="mdi mdi-bookmark-remove"></i> </a>
+                                                    <a href="{{route('services.show', $service->id)}}">view</a> |
+                                                    <a href="{{route('services.edit', $service->id)}}">edit</a> |
+                                                    @if($service->status)
+                                                        <a href="{{route('toggle_service', $service->id)}}" style="color: red"> deactivate </a>
+                                                    @else
+                                                        <a href="{{route('toggle_service', $service->id)}}" style="color: green"> activate </a>
+                                                    @endif
                                                 </td>
                                             </tr>
                                         @endforeach

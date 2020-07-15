@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "5a993688a4552c644071256b6b56c39a",
+    "content-hash": "4902178e8839971e7e76d9c976eb149a",
     "packages": [
         {
             "name": "asm89/stack-cors",
@@ -3751,6 +3751,42 @@
             "time": "2019-10-24T08:53:34+00:00"
         },
         {
+            "name": "viest/php-ext-xlswriter-ide-helper",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/viest/php-ext-xlswriter-ide-helper.git",
+                "reference": "0d9c2d39802e6c1ebbad7d515d860a50c131f12e"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/viest/php-ext-xlswriter-ide-helper/zipball/0d9c2d39802e6c1ebbad7d515d860a50c131f12e",
+                "reference": "0d9c2d39802e6c1ebbad7d515d860a50c131f12e",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=7"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Vtiful\\Kernel\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "viest",
+                    "email": "wjx@php.net"
+                }
+            ],
+            "description": "PHP Extension Xlswriter IDE Helper",
+            "time": "2020-06-08T13:56:32+00:00"
+        },
+        {
             "name": "vlucas/phpdotenv",
             "version": "v4.1.7",
             "source": {
@@ -5853,7 +5889,9 @@
     ],
     "aliases": [],
     "minimum-stability": "dev",
-    "stability-flags": [],
+    "stability-flags": {
+        "viest/php-ext-xlswriter-ide-helper": 20
+    },
     "prefer-stable": true,
     "prefer-lowest": false,
     "platform": {

@@ -24,7 +24,8 @@ class CreateServiceRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'service_id' => ['required'],
+            'attendees' => ['required'],
         ];
     }
 }

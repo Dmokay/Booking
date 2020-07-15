@@ -9,8 +9,9 @@
                     <div class="col-lg-12 grid-margin stretch-card">
                         <div class="card">
                             <div class="card-body">
-                                <h4 class="card-title">{{$service->title}} ({{$service->approved->count()}} / 100 approved)</h4>
-                                <p class="card-description">on {{$service->when}}</p>
+                                <h4 class="card-title">{{$service->title}} ({{$service->approved->count()}} / {{$service->count}} approved)</h4>
+                                <p class="card-description">when: <strong>{{$service->when}}</strong></p>
+                                <p class="card-description">Max Attendance: <strong>{{$service->count}}</strong></p>
                                 <ul class="nav nav-tabs" role="tablist">
                                     <li class="nav-item">
                                         <a class="nav-link active" href="{{route('services.show', [$service->id])}}" role="tab">
@@ -24,8 +25,11 @@
                                     </li>
                                 </ul>
                                 <div class="col-md-12">
+                                    <div class="col-md-12" style="margin: 5px">
+                                        <a href="{{route('services.show', [$service->id, 'export'=>true])}}" class="btn btn-sm btn-primary pull-right">Export as Excel</a>
+                                    </div>
                                     <div class="table-responsive">
-                                        <table class="table table-hover">
+                                        <table class="table table-hover table-sm table-striped">
                                             <thead>
                                             <tr>
                                                 <th>Name</th>

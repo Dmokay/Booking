@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Booking;
+use App\Helpers\Helper;
 use App\Service;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -53,12 +54,17 @@ class ServicesController extends Controller
         $service = Service::findOrFail($id);
         if (isset($request->tab) && $request->tab == "requested"){
             $data = Booking::select(DB::raw('count(*) as count'), 'names', 'phone', 'status', 'created_at', 'id')
-                ->where('service_id', $id)->whereNotIn('status', [Booking::STATUS_APPROVED])
+                ->where('service_id', $id)->whereNotIn('status', [Booking::STATUS_APPROVED])->latest()
                 ->groupBy('request_id')->paginate(100);
             return view('Services.requests', compact('service', 'data'));
         } else {
             $data = Booking::where('service_id', $id)->where('status', Booking::STATUS_APPROVED)
-                ->paginate(100);
+                ->orderBy('updated_at', 'desc');
+            if (isset($request->export)){
+                $file =  Helper::exportResponses($data);
+                return response()->download(storage_path("app/public/excel/$file"));
+            }
+            $data = $data->paginate(100);
             return view('Services.view', compact('service', 'data'));
         }
     }
@@ -71,7 +77,8 @@ class ServicesController extends Controller
      */
     public function edit($id)
     {
-        //
+        $service = Service::findOrFail($id);
+        return view('Services.edit', compact('service'));
     }
 
     /**
@@ -83,7 +90,9 @@ class ServicesController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $service = Service::findOrFail($id);
+        $service->update($request->all());
+        return redirect()->route('services.show', $service->id)->withStatus("Service Successfully Updated!");
     }
 
     /**
@@ -95,5 +104,11 @@ class ServicesController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function toggle($id){
+        $service = Service::findOrFail($id);
+        $service->update(['status'=>!$service->status]);
+        return redirect()->back()->withStatus("Service Updated!");
     }
 }

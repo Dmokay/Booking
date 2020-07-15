@@ -32,19 +32,28 @@
     <div class="wrapper wrapper--w680">
         <div class="card card-1">
             <div class="card-heading"></div>
-            <div class="card-body">
-                <h2 class="title">Register Below</h2>
+            <div class="card-body" style="padding-top: 20px">
+                <h6 class="title" style="margin: 8px 0px">
+                    <a href="{{route('validate_attendance')}}">Need to validate an earlier Attendance request? click here</a>
+                </h6>
+                <h2 class="title" style="margin: 12px 0px">Register Below</h2>
                 @if (session('status'))
                     <div class="row"
                          style="margin: 20px;width: 100%;background-color: green;border: 1px solid darkgreen">
                         {{session('status')}}
                     </div>
                 @endif
+                @if (session('error'))
+                    <div class="row"
+                         style="margin: 20px;width: 100%;background-color: red;border: 1px solid darkred">
+                        {{session('error')}}
+                    </div>
+                @endif
                 <form method="POST" action="{{route('requests.store')}}">
                     @csrf
                     <div class="input-group">
                         <div class="rs-select2 js-select-simple select--no-search">
-                            <select name="service_id">
+                            <select name="service_id" required>
                                 <option disabled="disabled" selected="selected">Select Service</option>
                                 @foreach($services as $service)
                                     <option value="{{$service->id}}">{{$service->when}} -{{$service->title}}</option>
@@ -55,7 +64,7 @@
                     </div>
                     <div class="input-group">
                         <div class="rs-select2 js-select-simple select--no-search">
-                            <select name="attendees" onchange="countChange(this)">
+                            <select name="attendees" required onchange="countChange(this)">
                                 <option disabled selected="selected">Select Number of Attendees</option>
                                 <option value="1">1 Attendee</option>
                                 <option value="2">2 Attendees</option>
@@ -76,12 +85,12 @@
                     <div class="row row-space elm">
                         <div class="col-2">
                             <div class="input-group">
-                                <input class="input--style-1" type="text" placeholder="NAME" required name="names[]">
+                                <input class="input--style-1" type="text" placeholder="Enter NAMES" required name="names[]">
                             </div>
                         </div>
                         <div class="col-2">
                             <div class="input-group">
-                                <input class="input--style-1" type="text" placeholder="PHONE" required name="phone[]">
+                                <input class="input--style-1" type="text" placeholder="Enter Valid PHONE" required name="phone[]">
                             </div>
                         </div>
                     </div>
