@@ -21,7 +21,7 @@
                                             <th style="font-weight: bolder">Title</th>
                                             <th style="font-weight: bolder">Description</th>
                                             <th style="font-weight: bolder">Date</th>
-                                            <th style="font-weight: bolder">Service Limit</th>
+                                            <th style="font-weight: bolder">Service Limit (Upper,Lower) decks</th>
                                             <th style="font-weight: bolder">Attendance Count</th>
                                             <th style="font-weight: bolder">Status</th>
                                             <th style="font-weight: bolder">Actions</th>
@@ -33,9 +33,9 @@
                                                 <td>{{$service->title}}</td>
                                                 <td>{{$service->description}}</td>
                                                 <td>{{$service->when}}</td>
-                                                <td>{{$service->count}} attendees</td>
+                                                <td>{{$service->upper_deck}} Upper Deck, {{$service->lower_deck}} Lower deck</td>
                                                 <td>
-                                                    {{$service->approved->count()." approved from ".$service->bookings->count(). " Requests"}}</td>
+                                                    {{$service->approved_lower_deck->count() + $service->approved_upper_deck->count()." approved from ".$service->bookings->count(). " Requests"}}</td>
                                                 <td>
                                                     <label
                                                         class="badge {{$service->status ? 'badge-success': 'badge-danger'}}">

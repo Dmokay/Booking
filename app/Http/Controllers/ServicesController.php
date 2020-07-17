@@ -53,7 +53,7 @@ class ServicesController extends Controller
     {
         $service = Service::findOrFail($id);
         if (isset($request->tab) && $request->tab == "requested") {
-            $data = Booking::select(DB::raw('count(*) as count'), 'names', 'phone', 'status', 'created_at', 'id')
+            $data = Booking::select(DB::raw('count(*) as count'), 'names','deck', 'phone', 'status', 'created_at', 'id')
                 ->where('service_id', $id)->whereNotIn('status', [Booking::STATUS_APPROVED]);
             if ($request->filled('phone') && $request->phone != "")
                 $data = $data->where('phone', Helper::formatNumber($request->phone));

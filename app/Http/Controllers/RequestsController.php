@@ -23,7 +23,7 @@ class RequestsController extends Controller
         if ($request->filled('phone') && $request->phone != "")
             $bookings = $bookings->where('phone', Helper::formatNumber($request->phone));
         if ($request->filled('names') && $request->names != "")
-            $bookings = $bookings->where('names', 'like', '%'.$request->names.'%');
+            $bookings = $bookings->where('names', 'like', '%' . $request->names . '%');
         if ($request->filled('service_id') && $request->service_id != "")
             $bookings = $bookings->where('service_id', $request->service_id);
         if ($request->filled('status') && $request->status != "")
@@ -62,7 +62,8 @@ class RequestsController extends Controller
                 'request_id' => $request_id,
                 'names' => $attendee,
                 'phone' => Helper::formatNumber($request->phone[$index]),
-                'service_id' => $request->service_id
+                'service_id' => $request->service_id,
+                'deck' => $request->deck
             ]);
         }
         return redirect()->back()->withStatus("Request Successfully Received");
@@ -116,19 +117,29 @@ class RequestsController extends Controller
     public function approve_request($id, Request $request)
     {
         $booking = Booking::with('service')->findOrFail($id);
-        $approved = $booking->service->approved->count();
+        if ($booking->deck == "upper_deck") {
+            $approved = $booking->service->approved_upper_deck->count();
+            $max = $booking->service->upper_deck;
+        } else {
+            $approved = $booking->service->approved_lower_deck->count();
+            $max = $booking->service->lower_deck;
+        }
         $related_bookings = Booking::where('request_id', $booking->request_id)->get();
-        if (($approved + count($related_bookings)) > $booking->service->count && $request->status == 1) {
-            return redirect()->back()->withError("Maximum Approval limit can't be exceeded!");
+        if (($approved + count($related_bookings)) > $max && $request->status == 1) {
+            return redirect()->back()->withError("Maximum Approval limit for Deck can't be exceeded! You can try and change preferred deck");
         }
         foreach ($related_bookings as $attendee) {
             if ($request->status == 1) {
-                $attendee->update(['status' => Booking::STATUS_APPROVED]);
+                if ($attendee->deck == "lower_deck")
+                    $seat = Helper::getNextSeat(1, $booking->service->lower_deck);
+                else
+                    $seat = Helper::getNextSeat($booking->service->lower_deck + 1, $booking->service->lower_deck + $booking->service->upper_deck);
+                $attendee->update(['status' => Booking::STATUS_APPROVED, 'seat' => $seat]);
             } elseif ($request->status == -1) {
                 $attendee->update(['status' => Booking::STATUS_REJECTED]);
             }
         }
-        return redirect()->back()->withStatus("Request updated!");
+        return redirect()->back()->withStatus("Request updated Successfully!");
     }
 
     public function validate_attendance(Request $request)
@@ -137,5 +148,15 @@ class RequestsController extends Controller
         $bookings = Booking::where('phone', $phone)->latest()->get();
         $phone = $request->phone;
         return view('Request.validate-attendance', compact('bookings', 'phone'));
+    }
+
+    public function shift_deck(Request $request, $id)
+    {
+        $booking = Booking::findOrFail($id);
+        $related_bookings = Booking::where('request_id', $booking->request_id)->get();
+        foreach ($related_bookings as $attendee) {
+            $attendee->update(['deck' => $request->deck]);
+        }
+        return redirect()->back()->withStatus("Request updated Successfully!");
     }
 }

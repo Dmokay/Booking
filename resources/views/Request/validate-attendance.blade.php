@@ -66,6 +66,7 @@
                                         <h5>Status: {{$booking->decoded_status}}</h5>
                                     @elseif($booking->status == 1)
                                         <h5>Status: <span style="color: green">{{$booking->decoded_status}}</span></h5>
+                                        <h5>Allocated Seat: <span style="color: green">{{$booking->seat}}</span></h5>
                                     @else
                                         <h5>Status: <span style="color: red">{{$booking->decoded_status}}</span></h5>
                                     @endif

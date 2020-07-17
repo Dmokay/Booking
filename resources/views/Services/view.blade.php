@@ -9,15 +9,15 @@
                     <div class="col-lg-12 grid-margin stretch-card">
                         <div class="card">
                             <div class="card-body">
-                                <h4 class="card-title">{{$service->title}} ({{$service->approved->count()}}
-                                    / {{$service->count}} approved)</h4>
+                                <h4 class="card-title">{{$service->title}} ({{$service->approved_lower_deck->count() + $service->approved_upper_deck->count()}}
+                                    / {{$service->total_max}} approved)</h4>
                                 <p class="card-description">when: <strong>{{$service->when}}</strong></p>
-                                <p class="card-description">Max Attendance: <strong>{{$service->count}}</strong></p>
+                                <p class="card-description">Max Attendance: <strong>{{$service->total_max}}</strong></p>
                                 <ul class="nav nav-tabs" role="tablist">
                                     <li class="nav-item">
                                         <a class="nav-link active" href="{{route('services.show', [$service->id])}}"
                                            role="tab">
-                                            Approved Attendees ({{$service->approved->count()}})
+                                            Approved ({{$service->approved_lower_deck->count() ." -lower, " . $service->approved_upper_deck->count()." - upper"}})
                                         </a>
                                     </li>
                                     <li class="nav-item">
@@ -62,6 +62,7 @@
                                                 <th>Name</th>
                                                 <th>Phone</th>
                                                 <th>Status</th>
+                                                <th>Deck</th>
                                                 <th>Seat</th>
                                                 <th>Requested At</th>
                                                 <th>approved At</th>
@@ -74,6 +75,7 @@
                                                     <td>{{$booking->names}}</td>
                                                     <td>{{$booking->phone}}</td>
                                                     <td><label class="badge badge-success">Approved</label></td>
+                                                    <td>{{$booking->deck}}</td>
                                                     <td>{{$booking->seat}}</td>
                                                     <td>{{$booking->created_at}}</td>
                                                     <td>{{$booking->updated_at}}</td>

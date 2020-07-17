@@ -27,8 +27,13 @@
                                                placeholder="When" required data-toggle="datetimepicker" data-target="#dated">
                                     </div>
                                     <div class="form-group">
-                                        <label for="exampleInputUsername1">Max Attendees*</label>
-                                        <input type="number" class="form-control form-control-sm" required name="count" value="{{$service->count}}"
+                                        <label for="exampleInputUsername1">Max Attendees on Upper Deck*</label>
+                                        <input type="number" class="form-control form-control-sm" required name="upper_deck" value="{{$service->upper_deck}}"
+                                               placeholder="Max Attendees">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="exampleInputUsername1">Max Attendees on Lower Deck*</label>
+                                        <input type="number" class="form-control form-control-sm" required name="lower_deck" value="{{$service->lower_deck}}"
                                                placeholder="Max Attendees">
                                     </div>
                                     <div class="form-group">
