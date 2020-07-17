@@ -3,8 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Booking;
+use App\Helpers\Helper;
 use App\Service;
 use Carbon\Carbon;
+use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Http\Request;
 use SebastianBergmann\Comparator\Book;
 
@@ -23,7 +25,7 @@ class HomeController extends Controller
     /**
      * Show the application dashboard.
      *
-     * @return \Illuminate\Contracts\Support\Renderable
+     * @return Renderable
      */
     public function index()
     {
@@ -35,5 +37,10 @@ class HomeController extends Controller
             ->count();
         $services = Service::where('status', true)->count();
         return view('welcome', compact('requests_today', 'approved_today', 'rejected_today', 'services'));
+    }
+
+    public function test(){
+        $response = Helper::getNextSeat(5, 1, 42);
+        dd($response);
     }
 }

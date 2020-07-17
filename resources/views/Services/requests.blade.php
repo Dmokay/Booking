@@ -9,23 +9,29 @@
                     <div class="col-lg-12 grid-margin stretch-card">
                         <div class="card">
                             <div class="card-body">
-                                <h4 class="card-title">{{$service->title}} ({{$service->approved->count()}} / {{$service->count}} approved)</h4>
+                                <h4 class="card-title">{{$service->title}}
+                                    ({{$service->approved_lower_deck->count() + $service->approved_upper_deck->count()}}
+                                    / {{$service->total_max}} approved)</h4>
                                 <p class="card-description">when: <strong>{{$service->when}}</strong></p>
-                                <p class="card-description">Max Attendance: <strong>{{$service->count}}</strong></p>
+                                <p class="card-description">Max Attendance: <strong>{{$service->total_max}}</strong></p>
                                 <ul class="nav nav-tabs" role="tablist">
                                     <li class="nav-item">
-                                        <a class="nav-link" href="{{route('services.show', [$service->id])}}" role="tab">
-                                            Approved Attendees ({{$service->approved->count()}})
+                                        <a class="nav-link" href="{{route('services.show', [$service->id])}}"
+                                           role="tab">
+                                            Approved ({{$service->approved_lower_deck->count() ." -lower, " . $service->approved_upper_deck->count()." - upper"}})
                                         </a>
                                     </li>
                                     <li class="nav-item">
-                                        <a class="nav-link active" href="{{route('services.show', [$service->id, 'tab'=>'requested'])}}" role="tab">
+                                        <a class="nav-link active"
+                                           href="{{route('services.show', [$service->id, 'tab'=>'requested'])}}"
+                                           role="tab">
                                             Requests ({{$service->pending->count() + $service->rejected->count()}})
                                         </a>
                                     </li>
                                 </ul>
                                 <div class="col-md-12">
-                                    <form class="forms-sample" action="{{route('services.show', [$service->id])}}" method="get">
+                                    <form class="forms-sample" action="{{route('services.show', [$service->id])}}"
+                                          method="get">
                                         <div class="row">
                                             <input type="hidden" name="tab" value="requested">
                                             <div class="form-group col-md-3">
@@ -61,6 +67,7 @@
                                                 <th>Name</th>
                                                 <th>Phone</th>
                                                 <th>Attendees</th>
+                                                <th>Deck</th>
                                                 <th>Status</th>
                                                 <th>Requested At</th>
                                                 <th>Actions</th>
@@ -72,6 +79,7 @@
                                                     <td>{{$booking->names}}</td>
                                                     <td>{{$booking->phone}}</td>
                                                     <td>{{$booking->count}}</td>
+                                                    <td>{{$booking->deck}}</td>
                                                     <td>
                                                         <label
                                                             class="badge {{$booking->status == 0 ? 'badge-info': 'badge-danger'}}">
@@ -83,6 +91,14 @@
                                                         @if($booking->status != 1)
                                                             <a href="{{route('approve_request', [$booking->id, 'status'=>1])}}"
                                                                style="color: green">approve</a> |
+                                                        @endif
+                                                        @if($booking->deck == 'upper_deck')
+                                                            <a href="{{route('shift_deck', [$booking->id, 'deck'=>'lower_deck'])}}"
+                                                               >Shift to Lower Deck</a> |
+                                                        @endif
+                                                        @if($booking->deck == 'lower_deck')
+                                                            <a href="{{route('shift_deck', [$booking->id, 'deck'=>'upper_deck'])}}"
+                                                               >Shift to Upper Deck</a> |
                                                         @endif
                                                         @if($booking->status != -1)
                                                             <a href="{{route('approve_request', [$booking->id, 'status'=>-1])}}"

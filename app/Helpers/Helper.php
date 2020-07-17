@@ -4,6 +4,7 @@
 namespace App\Helpers;
 
 
+use App\Booking;
 use Carbon\Carbon;
 use Vtiful\Kernel\Excel;
 
@@ -33,12 +34,29 @@ class Helper
         return $number;
     }
 
+    public static function getNextSeat($min, $max, $seat = null)
+    {
+        if ($seat != null)
+            if (!Booking::where('status', Booking::STATUS_APPROVED)->where('seat', $seat)->exists())
+                return $seat;
+        $range = range($min, $max);
+        $seat = -1;
+        foreach ($range as $index) {
+            if (!Booking::where('status', Booking::STATUS_APPROVED)->where('seat', $index)->exists()) {
+                $seat = $index;
+                break;
+            }
+
+        }
+        return $seat;
+    }
+
     public static function exportResponses($query)
     {
         $query = $query->get();
         $excel_config = ['path' => storage_path("app/public/excel")];
         $excel = new Excel($excel_config);
-        $file_name = "Export_".Carbon::now()->format("ymdhis").".xlsx";
+        $file_name = "Export_" . Carbon::now()->format("ymdhis") . ".xlsx";
         $file = $excel->fileName($file_name, "Attendees")
             ->header(['NAME', 'PHONE', 'STATUS']);
         foreach ($query as $attendee) {

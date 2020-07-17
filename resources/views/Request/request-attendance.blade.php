@@ -64,6 +64,16 @@
                     </div>
                     <div class="input-group">
                         <div class="rs-select2 js-select-simple select--no-search">
+                            <select name="deck" required onchange="countChange(this)">
+                                <option disabled selected="selected">Select Preferred Deck</option>
+                                <option value="upper_deck">Upper deck</option>
+                                <option value="lower_deck">Lower Deck</option>
+                            </select>
+                            <div class="select-dropdown"></div>
+                        </div>
+                    </div>
+                    <div class="input-group">
+                        <div class="rs-select2 js-select-simple select--no-search">
                             <select name="attendees" required onchange="countChange(this)">
                                 <option disabled selected="selected">Select Number of Attendees</option>
                                 <option value="1">1 Attendee</option>
