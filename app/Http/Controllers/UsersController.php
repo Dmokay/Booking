@@ -37,6 +37,7 @@ class UsersController extends Controller
      */
     public function store(CreateUserRequest $request)
     {
+        $request['password'] = bcrypt($request->password);
         $user = User::create($request->all());
         return  redirect()->route('users.index')->withStatus("User Successfully Added!");
     }
