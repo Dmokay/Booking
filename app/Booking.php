@@ -10,7 +10,7 @@ class Booking extends Model
     const STATUS_APPROVED = 1;
     const STATUS_REJECTED = -1;
 
-    protected $fillable = ['request_id', 'service_id', 'phone', 'names', 'status', 'seat'];
+    protected $fillable = ['request_id', 'service_id', 'phone', 'names', 'status', 'seat', 'deck'];
 
     public function service(){
         return $this->belongsTo(Service::class, 'service_id');
