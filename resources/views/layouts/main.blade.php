@@ -26,7 +26,6 @@
 
     @include('layouts.includes.header')
     @yield('content')
-
 </div>
 
 <!-- container-scroller -->

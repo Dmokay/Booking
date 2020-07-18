@@ -28,7 +28,7 @@
 </head>
 
 <body>
-<div class="page-wrapper bg-blue p-t-100 p-b-100 font-robo">
+<div class="page-wrapper bg-blue p-t-100 p-b-100 font-robo" style="background-color: #d96e03">
     <div class="wrapper wrapper--w680">
         <div class="card card-1">
             <div class="card-heading"></div>
