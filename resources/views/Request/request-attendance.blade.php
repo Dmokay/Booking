@@ -36,7 +36,8 @@
                 <h6 class="title" style="margin: 8px 0px">
                     <a href="{{route('validate_attendance')}}">Need to validate an earlier Attendance request? click here</a>
                 </h6>
-                <h2 class="title" style="margin: 12px 0px">Register Below</h2>
+                <h3 class="title" style="margin: 12px 0px">Register Below</h3>
+                <h5 style="color: #d96e03">NOTE: Only members between the age of 13 and 58 will be allowed</h5><br>
                 @if (session('status'))
                     <div class="row"
                          style="margin: 20px;width: 100%;background-color: green;border: 1px solid darkgreen">
@@ -49,7 +50,7 @@
                         {{session('error')}}
                     </div>
                 @endif
-                <form method="POST" action="{{route('requests.store')}}">
+                <form method="POST" action="{{route('store_request')}}">
                     @csrf
                     <div class="input-group">
                         <div class="rs-select2 js-select-simple select--no-search">
