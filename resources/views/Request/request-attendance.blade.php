@@ -33,6 +33,9 @@
         <div class="card card-1">
             <div class="card-heading"></div>
             <div class="card-body" style="padding-top: 20px">
+                <h5 style="text-emphasis-color: #e3fc3b">
+                    To proceed ensure you are within the Age bracket of 13 - 65 years.
+                </h5>
                 <h6 class="title" style="margin: 8px 0px">
                     <a href="{{route('validate_attendance')}}">Need to validate an earlier Attendance request? click here</a>
                 </h6>

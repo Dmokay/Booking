@@ -16,34 +16,43 @@
                                     <div class="row">
                                         <div class="col-lg-3 d-flex grid-margin stretch-card">
                                             <div class="card sale-diffrence-border">
-                                                <div class="card-body">
-                                                    <h3 class="font-weight-bold mb-3">{{$requests_today}}</h3>
-                                                    <p class="pb-0 mb-0">Requests Received Today</p>
-                                                </div>
+                                                <a href="{{route('requests.index')}}">
+                                                    <div class="card-body">
+                                                        <h3 class="font-weight-bold mb-3">{{$requests_today}}</h3>
+                                                        <p class="pb-0 mb-0">Requests Received Today</p>
+                                                    </div>
+                                                </a>
+
                                             </div>
                                         </div>
                                         <div class="col-lg-3 d-flex grid-margin stretch-card">
                                             <div class="card sale-diffrence-border">
-                                                <div class="card-body">
-                                                    <h2 class="text-dark mb-2 font-weight-bold">{{$approved_today}}</h2>
-                                                    <h4 class="pb-0 mb-0">Requests Approved Today</h4>
-                                                </div>
+                                                <a href="{{route('requests.index')}}">
+                                                    <div class="card-body">
+                                                        <h2 class="text-dark mb-2 font-weight-bold">{{$approved_today}}</h2>
+                                                        <h4 class="pb-0 mb-0">Requests Approved Today</h4>
+                                                    </div>
+                                                </a>
                                             </div>
                                         </div>
                                         <div class="col-lg-3 d-flex grid-margin stretch-card">
                                             <div class="card sale-diffrence-border">
-                                                <div class="card-body">
+                                                <a href="{{route('requests.index')}}">
+                                                 <div class="card-body">
                                                     <h2 class="text-dark mb-2 font-weight-bold">{{$rejected_today}}</h2>
                                                     <h4 class="pb-0 mb-0">Requests Rejected Today</h4>
-                                                </div>
+                                                 </div>
+                                                </a>
                                             </div>
                                         </div>
                                         <div class="col-lg-3 d-flex grid-margin stretch-card">
                                             <div class="card sale-diffrence-border">
-                                                <div class="card-body">
+                                                <a href="{{route('requests.index')}}">
+                                                 <div class="card-body">
                                                     <h2 class="text-dark mb-2 font-weight-bold">{{$services}}</h2>
                                                     <h4 class="pb-0 mb-0">Upcoming Services</h4>
-                                                </div>
+                                                 </div>
+                                                </a>
                                             </div>
                                         </div>
                                     </div>
