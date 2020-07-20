@@ -80,6 +80,8 @@
                                 <option value="1">1 Attendee</option>
                                 <option value="2">2 Attendees</option>
                                 <option value="3">3 Attendees</option>
+                                <option value="4">4 Attendees</option>
+                                <option value="5">5 Attendees</option>
                             </select>
                             <div class="select-dropdown"></div>
                         </div>
@@ -132,6 +134,17 @@
             $('.replica').append($('.elm').clone().removeClass("elm"));
             $('.replica').append($('.elm').clone().removeClass("elm"));
         } else if (count_value == 3) {
+            $('.replica').append($('.elm').clone().removeClass("elm"))
+            $('.replica').append($('.elm').clone().removeClass("elm"))
+            $('.replica').append($('.elm').clone().removeClass("elm"))
+        } else if (count_value == 4) {
+            $('.replica').append($('.elm').clone().removeClass("elm"))
+            $('.replica').append($('.elm').clone().removeClass("elm"))
+            $('.replica').append($('.elm').clone().removeClass("elm"))
+            $('.replica').append($('.elm').clone().removeClass("elm"))
+        } else if (count_value == 5) {
+            $('.replica').append($('.elm').clone().removeClass("elm"))
+            $('.replica').append($('.elm').clone().removeClass("elm"))
             $('.replica').append($('.elm').clone().removeClass("elm"))
             $('.replica').append($('.elm').clone().removeClass("elm"))
             $('.replica').append($('.elm').clone().removeClass("elm"))
