@@ -27,7 +27,7 @@
                                         </div>
                                         <div class="col-lg-3 d-flex grid-margin stretch-card">
                                             <div class="card sale-diffrence-border">
-                                                <a href="{{route('requests.index')}}">
+                                                <a href="{{route('requests.index', ['status'=>1])}}">
                                                     <div class="card-body">
                                                         <h2 class="text-dark mb-2 font-weight-bold">{{$approved_today}}</h2>
                                                         <h4 class="pb-0 mb-0">Requests Approved Today</h4>
@@ -37,7 +37,7 @@
                                         </div>
                                         <div class="col-lg-3 d-flex grid-margin stretch-card">
                                             <div class="card sale-diffrence-border">
-                                                <a href="{{route('requests.index')}}">
+                                                <a href="{{route('requests.index', ['status'=>-1])}}">
                                                  <div class="card-body">
                                                     <h2 class="text-dark mb-2 font-weight-bold">{{$rejected_today}}</h2>
                                                     <h4 class="pb-0 mb-0">Requests Rejected Today</h4>
@@ -47,7 +47,7 @@
                                         </div>
                                         <div class="col-lg-3 d-flex grid-margin stretch-card">
                                             <div class="card sale-diffrence-border">
-                                                <a href="{{route('requests.index')}}">
+                                                <a href="{{route('services.index')}}">
                                                  <div class="card-body">
                                                     <h2 class="text-dark mb-2 font-weight-bold">{{$services}}</h2>
                                                     <h4 class="pb-0 mb-0">Upcoming Services</h4>
