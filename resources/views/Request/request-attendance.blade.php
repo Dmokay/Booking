@@ -24,7 +24,7 @@
     <link href="vendor/datepicker/daterangepicker.css" rel="stylesheet" media="all">
 
     <!-- Main CSS-->
-    <link href="css/main.css" rel="stylesheet" media="all">
+    <link href="css/main1.css" rel="stylesheet" media="all">
 </head>
 
 <body>
@@ -39,7 +39,8 @@
                 <h6 class="title" style="margin: 8px 0px">
                     <a href="{{route('validate_attendance')}}">Need to validate an earlier Attendance request? click here</a>
                 </h6>
-                <h2 class="title" style="margin: 12px 0px">Register Below</h2>
+                <h3 class="title" style="margin: 12px 0px">Register Below</h3>
+                <h5 style="color: #d96e03">NOTE: Only members between the age of 13 and 58 will be allowed</h5><br>
                 @if (session('status'))
                     <div class="row"
                          style="margin: 20px;width: 100%;background-color: green;border: 1px solid darkgreen">
@@ -52,7 +53,7 @@
                         {{session('error')}}
                     </div>
                 @endif
-                <form method="POST" action="{{route('requests.store')}}">
+                <form method="POST" action="{{route('store_request')}}">
                     @csrf
                     <div class="input-group">
                         <div class="rs-select2 js-select-simple select--no-search">
@@ -82,6 +83,8 @@
                                 <option value="1">1 Attendee</option>
                                 <option value="2">2 Attendees</option>
                                 <option value="3">3 Attendees</option>
+                                <option value="4">4 Attendees</option>
+                                <option value="5">5 Attendees</option>
                             </select>
                             <div class="select-dropdown"></div>
                         </div>
@@ -134,6 +137,17 @@
             $('.replica').append($('.elm').clone().removeClass("elm"));
             $('.replica').append($('.elm').clone().removeClass("elm"));
         } else if (count_value == 3) {
+            $('.replica').append($('.elm').clone().removeClass("elm"))
+            $('.replica').append($('.elm').clone().removeClass("elm"))
+            $('.replica').append($('.elm').clone().removeClass("elm"))
+        } else if (count_value == 4) {
+            $('.replica').append($('.elm').clone().removeClass("elm"))
+            $('.replica').append($('.elm').clone().removeClass("elm"))
+            $('.replica').append($('.elm').clone().removeClass("elm"))
+            $('.replica').append($('.elm').clone().removeClass("elm"))
+        } else if (count_value == 5) {
+            $('.replica').append($('.elm').clone().removeClass("elm"))
+            $('.replica').append($('.elm').clone().removeClass("elm"))
             $('.replica').append($('.elm').clone().removeClass("elm"))
             $('.replica').append($('.elm').clone().removeClass("elm"))
             $('.replica').append($('.elm').clone().removeClass("elm"))
