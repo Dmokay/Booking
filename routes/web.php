@@ -26,7 +26,9 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('/service/toggle/{id}', 'ServicesController@toggle')->name('toggle_service');
     Route::get('/report', 'ReportsController@index')->name('report');
     Route::get('/shift-deck/{id}', 'RequestsController@shift_deck')->name('shift_deck');
-    Route::get('/approve-request/{id}', 'RequestsController@approve_request')->name('approve_request');
+    Route::any('/approve-request/{id}', 'RequestsController@approve_request')->name('approve_request');
+    Route::any('/change-seating/{id}', 'RequestsController@change_seating')->name('change_seating');
+    Route::any('/attend/{id}', 'RequestsController@attend')->name('attend');
     Route::resource('/requests', 'RequestsController');
     Route::resource('/services', 'ServicesController');
     Route::resource('/users', 'UsersController');

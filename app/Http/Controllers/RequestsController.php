@@ -131,12 +131,12 @@ class RequestsController extends Controller
         foreach ($related_bookings as $attendee) {
             if ($request->status == 1) {
                 if ($attendee->deck == "lower_deck")
-                    $seat = Helper::getNextSeat(1, $booking->service->lower_deck);
+                    $seat = Helper::getNextSeat(1, $booking->service->lower_deck, $booking->service_id);
                 else
-                    $seat = Helper::getNextSeat($booking->service->lower_deck + 1, $booking->service->lower_deck + $booking->service->upper_deck);
+                    $seat = Helper::getNextSeat($booking->service->lower_deck + 1, $booking->service->lower_deck + $booking->service->upper_deck, $booking->service_id);
                 $attendee->update(['status' => Booking::STATUS_APPROVED, 'seat' => $seat]);
             } elseif ($request->status == -1) {
-                $attendee->update(['status' => Booking::STATUS_REJECTED]);
+                $attendee->update(['status' => Booking::STATUS_REJECTED, 'attended'=>false]);
             }
         }
         return redirect()->back()->withStatus("Request updated Successfully!");
@@ -158,5 +158,29 @@ class RequestsController extends Controller
             $attendee->update(['deck' => $request->deck]);
         }
         return redirect()->back()->withStatus("Request updated Successfully!");
+    }
+
+    public function change_seating($id, Request $request)
+    {
+        $booking = Booking::findOrFail($id);
+        if (!Booking::where('status', Booking::STATUS_APPROVED)->where('seat', $request->seat)
+            ->whereNotIn('id', [$id])->where('service_id', $booking->service_id)->exists()) {
+            if ($booking->deck == "lower_deck")
+                $range = range(1, $booking->service->lower_deck);
+            else
+                $range = range($booking->service->lower_deck + 1, $booking->service->lower_deck + $booking->service->upper_deck);
+            if (in_array($request->seat, $range)) {
+                $booking->update(['seat' => $request->seat]);
+                return redirect()->back()->withStatus("Booking Seat updated Successfully!");
+            } else
+                return redirect()->back()->withError("Request Update Failed! Seat out of Range");
+        }
+        return redirect()->back()->withError("Request Update Failed! Seat already Occupied");
+    }
+
+    public function attend($id, Request $request){
+        $booking = Booking::findOrFail($id);
+        $booking->update(['attended'=>$request->attend]);
+        return redirect()->back()->withStatus("Updated Successfully!");
     }
 }

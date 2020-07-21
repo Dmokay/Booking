@@ -9,7 +9,8 @@
                     <div class="col-lg-12 grid-margin stretch-card">
                         <div class="card">
                             <div class="card-body">
-                                <h4 class="card-title">{{$service->title}} ({{$service->approved_lower_deck->count() + $service->approved_upper_deck->count()}}
+                                <h4 class="card-title">{{$service->title}}
+                                    ({{$service->approved_lower_deck->count() + $service->approved_upper_deck->count()}}
                                     / {{$service->total_max}} approved)</h4>
                                 <p class="card-description">when: <strong>{{$service->when}}</strong></p>
                                 <p class="card-description">Max Attendance: <strong>{{$service->total_max}}</strong></p>
@@ -17,7 +18,9 @@
                                     <li class="nav-item">
                                         <a class="nav-link active" href="{{route('services.show', [$service->id])}}"
                                            role="tab">
-                                            Approved ({{$service->approved_lower_deck->count() ." -lower, " . $service->approved_upper_deck->count()." - upper"}})
+                                            Approved
+                                            ({{$service->approved_lower_deck->count() ." -lower, " . $service->approved_upper_deck->count()." - upper"}}
+                                            )
                                         </a>
                                     </li>
                                     <li class="nav-item">
@@ -74,14 +77,74 @@
                                                 <tr>
                                                     <td>{{$booking->names}}</td>
                                                     <td>{{$booking->phone}}</td>
-                                                    <td><label class="badge badge-success">Approved</label></td>
+                                                    <td>
+                                                        <label class="badge badge-success">Approved</label>
+                                                        @if($booking->attended)
+                                                            <label class="badge badge-success">Attended</label>
+                                                        @else
+                                                            <label class="badge badge-danger">Not Attended</label>
+                                                        @endif
+                                                    </td>
                                                     <td>{{$booking->deck}}</td>
                                                     <td>{{$booking->seat}}</td>
                                                     <td>{{$booking->created_at}}</td>
                                                     <td>{{$booking->updated_at}}</td>
                                                     <td>
+                                                        <a data-toggle="modal" data-target="#approve_{{$booking->id}}"
+                                                           style="color: green;cursor: pointer">change seat</a> |
+                                                        <!-- Modal -->
+                                                        <div class="modal fade" id="approve_{{$booking->id}}"
+                                                             tabindex="-1" role="dialog"
+                                                             aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                            <div class="modal-dialog" role="document">
+                                                                <div class="modal-content">
+                                                                    <form
+                                                                        action="{{route('change_seating', [$booking->id, ])}}"
+                                                                        method="post">
+                                                                        @csrf
+                                                                        <input type="hidden" name="status" value="1">
+                                                                        <div class="modal-header">
+                                                                            <h5 class="modal-title"
+                                                                                id="exampleModalLabel">Approve
+                                                                                Request?</h5>
+                                                                            <button type="button" class="close"
+                                                                                    data-dismiss="modal"
+                                                                                    aria-label="Close">
+                                                                                <span aria-hidden="true">&times;</span>
+                                                                            </button>
+                                                                        </div>
+                                                                        <div class="modal-body">
+                                                                            <p>
+                                                                                <strong>Deck: </strong>{{$booking->deck}}
+                                                                                <br>
+                                                                            </p>
+                                                                            <label>Preferred Seat No.</label>
+                                                                            <input type="number" name="seat"
+                                                                                   value="{{$booking->seat}}"
+                                                                                   class="form-control">
+                                                                        </div>
+                                                                        <div class="modal-footer">
+                                                                            <button type="button"
+                                                                                    class="btn btn-secondary"
+                                                                                    data-dismiss="modal">Cancel
+                                                                            </button>
+                                                                            <button type="submit"
+                                                                                    class="btn btn-primary">Save
+                                                                            </button>
+                                                                        </div>
+                                                                    </form>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        @if($booking->attended)
+                                                            <a href="{{route('attend', [$booking->id, 'attend'=>0])}}"
+                                                               style="color: red">revoke attendance</a> |
+                                                        @else
+                                                            <a href="{{route('attend', [$booking->id, 'attend'=>1])}}"
+                                                               style="color: green">mark as attended</a> |
+                                                        @endif
                                                         <a href="{{route('approve_request', [$booking->id, 'status'=>-1])}}"
-                                                           style="color: red">cancel</a>
+                                                           style="color: red">cancel approval</a>
                                                     </td>
                                                 </tr>
                                             @endforeach

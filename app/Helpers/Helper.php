@@ -34,15 +34,17 @@ class Helper
         return $number;
     }
 
-    public static function getNextSeat($min, $max, $seat = null)
+    public static function getNextSeat($min, $max, $service_id, $seat = null)
     {
         if ($seat != null)
-            if (!Booking::where('status', Booking::STATUS_APPROVED)->where('seat', $seat)->exists())
+            if (!Booking::where('status', Booking::STATUS_APPROVED)->where('service_id', $service_id)
+                ->where('seat', $seat)->exists())
                 return $seat;
         $range = range($min, $max);
         $seat = -1;
         foreach ($range as $index) {
-            if (!Booking::where('status', Booking::STATUS_APPROVED)->where('seat', $index)->exists()) {
+            if (!Booking::where('status', Booking::STATUS_APPROVED)->where('service_id', $service_id)
+                ->where('seat', $index)->exists()) {
                 $seat = $index;
                 break;
             }
