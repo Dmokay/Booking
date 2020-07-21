@@ -136,7 +136,7 @@ class RequestsController extends Controller
                     $seat = Helper::getNextSeat($booking->service->lower_deck + 1, $booking->service->lower_deck + $booking->service->upper_deck, $booking->service_id);
                 $attendee->update(['status' => Booking::STATUS_APPROVED, 'seat' => $seat]);
             } elseif ($request->status == -1) {
-                $attendee->update(['status' => Booking::STATUS_REJECTED]);
+                $attendee->update(['status' => Booking::STATUS_REJECTED, 'attended'=>false]);
             }
         }
         return redirect()->back()->withStatus("Request updated Successfully!");
@@ -176,5 +176,11 @@ class RequestsController extends Controller
                 return redirect()->back()->withError("Request Update Failed! Seat out of Range");
         }
         return redirect()->back()->withError("Request Update Failed! Seat already Occupied");
+    }
+
+    public function attend($id, Request $request){
+        $booking = Booking::findOrFail($id);
+        $booking->update(['attended'=>$request->attend]);
+        return redirect()->back()->withStatus("Updated Successfully!");
     }
 }
