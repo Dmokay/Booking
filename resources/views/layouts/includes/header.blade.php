@@ -27,7 +27,6 @@
                   <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown" id="profileDropdown">
                     <span class="nav-profile-name">{{\Illuminate\Support\Facades\Auth::user()->name}}</span>
                     <span class="online-status"></span>
-                    <img src="{{asset('images/faces/face28.png')}}" alt="profile"/>
                   </a>
                   <div class="dropdown-menu dropdown-menu-right navbar-dropdown" aria-labelledby="profileDropdown">
                       <a class="dropdown-item" href="{{route('users.index')}}">

@@ -89,8 +89,33 @@
                                                     <td>{{$booking->created_at}}</td>
                                                     <td>
                                                         @if($booking->status != 1)
-                                                            <a href="{{route('approve_request', [$booking->id, 'status'=>1])}}"
-                                                               style="color: green">approve</a> |
+                                                            <a data-toggle="modal" data-target="#approve_{{$booking->id}}"
+                                                               style="color: green;cursor: pointer">approve</a> |
+                                                            <!-- Modal -->
+                                                            <div class="modal fade" id="approve_{{$booking->id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                                <div class="modal-dialog" role="document">
+                                                                    <div class="modal-content">
+                                                                        <form action="{{route('approve_request', [$booking->id, ])}}" method="post">
+                                                                            @csrf
+                                                                            <input type="hidden" name="status" value="1">
+                                                                        <div class="modal-header">
+                                                                            <h5 class="modal-title" id="exampleModalLabel">Approve Request?</h5>
+                                                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                                <span aria-hidden="true">&times;</span>
+                                                                            </button>
+                                                                        </div>
+                                                                        <div class="modal-body">
+                                                                            <label>OPTIONAL Preferred Seat No.</label>
+                                                                            <input type="number" name="seat" value="{{$booking->seat}}" class="form-control">
+                                                                        </div>
+                                                                        <div class="modal-footer">
+                                                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                                                                            <button type="submit" class="btn btn-primary">Save</button>
+                                                                        </div>
+                                                                        </form>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
                                                         @endif
                                                         @if($booking->deck == 'upper_deck')
                                                             <a href="{{route('shift_deck', [$booking->id, 'deck'=>'lower_deck'])}}"
