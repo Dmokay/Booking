@@ -66,8 +66,8 @@
                                             <tr>
                                                 <th>Name</th>
                                                 <th>Phone</th>
-                                                <th>Attendees</th>
-                                                <th>Deck</th>
+                                                <th>ID Number</th>
+                                                <th>Location</th>
                                                 <th>Status</th>
                                                 <th>Requested At</th>
                                                 <th>Actions</th>
@@ -78,8 +78,8 @@
                                                 <tr>
                                                     <td>{{$booking->names}}</td>
                                                     <td>{{$booking->phone}}</td>
-                                                    <td>{{$booking->count}}</td>
-                                                    <td>{{$booking->deck}}</td>
+                                                    <td>{{$booking->id_number}}</td>
+                                                    <td>{{$booking->location}}</td>
                                                     <td>
                                                         <label
                                                             class="badge {{$booking->status == 0 ? 'badge-info': 'badge-danger'}}">

@@ -64,8 +64,9 @@
                                             <tr>
                                                 <th>Name</th>
                                                 <th>Phone</th>
+                                                <th>ID Number</th>
+                                                <th>Location</th>
                                                 <th>Status</th>
-                                                <th>Deck</th>
                                                 <th>Seat</th>
                                                 <th>Requested At</th>
                                                 <th>approved At</th>
@@ -77,6 +78,8 @@
                                                 <tr>
                                                     <td>{{$booking->names}}</td>
                                                     <td>{{$booking->phone}}</td>
+                                                    <td>{{$booking->id_number}}</td>
+                                                    <td>{{$booking->location}}</td>
                                                     <td>
                                                         <label class="badge badge-success">Approved</label>
                                                         @if($booking->attended)
@@ -85,7 +88,6 @@
                                                             <label class="badge badge-danger">Not Attended</label>
                                                         @endif
                                                     </td>
-                                                    <td>{{$booking->deck}}</td>
                                                     <td>{{$booking->seat}}</td>
                                                     <td>{{$booking->created_at}}</td>
                                                     <td>{{$booking->updated_at}}</td>

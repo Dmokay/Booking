@@ -18,6 +18,7 @@ Route::get('/attendance-request', 'RequestsController@create');
 Route::get('/test', 'HomeController@test');
 Route::post('/attendance-request', 'RequestsController@store')->name("store_request");
 Route::get('/validate-attendance', 'RequestsController@validate_attendance')->name('validate_attendance');
+Route::post('callback/inbox', 'RequestsController@inbox');
 Route::group(['middleware' => ['auth']], function () {
     Route::get('/', function () {
         return redirect()->route('home');

@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "218e0bccc2db3f42c0e1ffd58f0a6835",
+    "content-hash": "cd0a7ff289ddb5ff9be293e2f4957332",
     "packages": [
         {
             "name": "asm89/stack-cors",
@@ -57,6 +57,59 @@
                 "stack"
             ],
             "time": "2019-12-24T22:41:47+00:00"
+        },
+        {
+            "name": "bongatech/api",
+            "version": "0.6.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/BongaTech/PHP-SDK.git",
+                "reference": "1c5fbee9ad37c4fc9bdd509f58ee8ac8be0ca196"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/BongaTech/PHP-SDK/zipball/1c5fbee9ad37c4fc9bdd509f58ee8ac8be0ca196",
+                "reference": "1c5fbee9ad37c4fc9bdd509f58ee8ac8be0ca196",
+                "shasum": ""
+            },
+            "require": {
+                "guzzlehttp/guzzle": "~6.0",
+                "php": "~7.2"
+            },
+            "require-dev": {
+                "phpunit/phpunit": ">=8.0",
+                "squizlabs/php_codesniffer": "^3.0"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.0-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "BongaTech\\Api\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Makamu Evans",
+                    "email": "makamuevans@gmail.com",
+                    "homepage": "https://makamuevans.co.ke",
+                    "role": "Developer"
+                }
+            ],
+            "description": "PHP Bongatech API",
+            "homepage": "https://github.com/BongaTech/PHP-SDK",
+            "keywords": [
+                "api",
+                "bongatech"
+            ],
+            "time": "2020-09-01T08:22:27+00:00"
         },
         {
             "name": "brick/math",

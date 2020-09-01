@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Booking;
 use App\Helpers\Helper;
 use App\Service;
+use App\SmsBooking;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
@@ -182,5 +183,36 @@ class RequestsController extends Controller
         $booking = Booking::findOrFail($id);
         $booking->update(['attended'=>$request->attend]);
         return redirect()->back()->withStatus("Updated Successfully!");
+    }
+
+    public function inbox(Request $request){
+        if (strtolower($request->short_message) == "attend"){
+            $smsBooking = SmsBooking::create(['phone'=>$request->phone]);
+            Helper::nextQuestion($smsBooking);
+            return response()->json("OK");
+        }
+        if (substr(strtolower($request->short_message), 0, 9 ) ===  "validate#"){
+            $id = substr($request->short_message, 9);
+            $booking = Booking::find($id);
+            if ($booking){
+                $message = "Status of Booking #$id is: $booking->decoded_status";
+                if ($booking->status == 1){
+                    $message .= "\nAllocated Seat: $booking->seat";
+                    $message .= "\nService: ".$booking->service->title." (".$booking->service->when.")";
+                }
+            } else {
+                $message = "Invalid Booking reference Number!";
+            }
+            Helper::sendQuestion($message, $request->phone);
+            return response()->json("OK");
+        }
+        $sms_booking = SmsBooking::where('phone', $request->phone)->where('status', '<', 30)->first();
+        if ($sms_booking){
+            Helper::validateInbox($sms_booking, $request->short_message);
+            return response()->json("OK");
+        } else {
+            Helper::sendQuestion("Invalid. To initiate Booking, send the word attend to this shortcode", $request->phone);
+            return response()->json("OK");
+        }
     }
 }
