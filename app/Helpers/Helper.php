@@ -84,7 +84,7 @@ class Helper
     public static function nextQuestion(SmsBooking $smsBooking){
         if ($smsBooking->status == 0){
             $services = Service::where('status', true)->orderBy('when')->get();
-            if ($services){
+            if (count($services) > 0){
                 $message = "Welcome. Please select a service you wish to attend by replying with: \n";
                 foreach ($services as $service){
                     $message .= "$service->id for $service->title($service->when)\n";
