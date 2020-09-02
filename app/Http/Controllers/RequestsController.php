@@ -206,7 +206,7 @@ class RequestsController extends Controller
             Helper::sendQuestion($message, $request->phone);
             return response()->json("OK");
         }
-        $sms_booking = SmsBooking::where('phone', $request->phone)->where('status', '<', 30)->first();
+        $sms_booking = SmsBooking::where('phone', $request->phone)->where('status', '<', 30)->latest()->first();
         if ($sms_booking){
             Helper::validateInbox($sms_booking, $request->short_message);
             return response()->json("OK");
