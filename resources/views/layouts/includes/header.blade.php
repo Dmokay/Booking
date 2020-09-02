@@ -16,10 +16,10 @@
 
             </ul>
 
-            <div class="text-center navbar-brand-wrapper d-flex align-items-center justify-content-center">
+            {{--<div class="text-center navbar-brand-wrapper d-flex align-items-center justify-content-center">
                 <a class="navbar-brand brand-logo" href="{{url('/')}}"><img src="{{asset('images/tandaza-logo.png')}}" alt="logo"/></a>
                 <a class="navbar-brand brand-logo-mini" href="{{url('/')}}"><img src="{{asset('images/tandaza-logo.png')}}" alt="logo"/></a>
-            </div>
+            </div>--}}
 
             <ul class="navbar-nav navbar-nav-right">
 
