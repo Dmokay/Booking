@@ -11,6 +11,7 @@ use BongaTech\Api\BongaTech;
 use BongaTech\Api\Models\Sms;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Str;
 use Vtiful\Kernel\Excel;
 
 class Helper
@@ -104,7 +105,7 @@ class Helper
         } elseif ($smsBooking->status == 4){
             //TODO DO the transfer
             $booking = Booking::create($smsBooking->toArray());
-            $booking->update(['status'=>0, 'deck'=>'lower_deck']);
+            $booking->update(['status'=>0, 'deck'=>'lower_deck', 'request_id'=>Str::uuid()->toString()]);
             $smsBooking->update(['status'=>30]);
             $message = "Thank you. Your booking reference is $booking->id. You can send the message validate#$booking->id to see the status of your booking";
             self::sendQuestion($message, $smsBooking->phone);
