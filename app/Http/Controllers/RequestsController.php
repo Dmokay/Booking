@@ -136,6 +136,9 @@ class RequestsController extends Controller
                 else
                     $seat = Helper::getNextSeat($booking->service->lower_deck + 1, $booking->service->lower_deck + $booking->service->upper_deck, $booking->service_id);
                 $attendee->update(['status' => Booking::STATUS_APPROVED, 'seat' => $seat]);
+                $message = "Your Booking has been confirmed for ".$attendee->service->title." on ". $attendee->service->when;
+                $message .="\nAllocated seat: $attendee->seat";
+                Helper::sendQuestion($message, $attendee->phone);
             } elseif ($request->status == -1) {
                 $attendee->update(['status' => Booking::STATUS_REJECTED, 'attended'=>false]);
             }
