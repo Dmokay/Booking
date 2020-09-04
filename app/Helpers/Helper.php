@@ -66,9 +66,9 @@ class Helper
         $excel = new Excel($excel_config);
         $file_name = "Export_" . Carbon::now()->format("ymdhis") . ".xlsx";
         $file = $excel->fileName($file_name, "Attendees")
-            ->header(['NAME', 'PHONE', 'SEAT', 'STATUS']);
+            ->header(['NAME', 'PHONE', 'ID NUMBER', 'LOCATION', 'SEAT', 'STATUS']);
         foreach ($query as $attendee) {
-            $file->data([[$attendee->names, $attendee->phone, $attendee->seat, $attendee->decoded_status]]);
+            $file->data([[$attendee->names, $attendee->phone, $attendee->id_number, $attendee->location, $attendee->seat, $attendee->decoded_status]]);
         }
         $file->output();
         return $file_name;
