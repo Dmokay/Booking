@@ -33,14 +33,11 @@
         <div class="card card-1">
             <div class="card-heading"></div>
             <div class="card-body" style="padding-top: 20px">
-                <h5 style="text-emphasis-color: #e3fc3b">
-                    To proceed ensure you are within the Age bracket of 13 - 65 years.
-                </h5>
                 <h6 class="title" style="margin: 8px 0px">
                     <a href="{{route('validate_attendance')}}">Need to validate an earlier Attendance request? click here</a>
                 </h6>
                 <h3 class="title" style="margin: 12px 0px">Register Below</h3>
-                <h5 style="color: #d96e03">NOTE: Only people between the age of 13 and 58 will be allowed</h5><br>
+                <h5 style="color: #d96e03">NOTE: Only people between the age of {{$age->min ?? '13'}} and {{$age->max ?? '55'}} will be allowed</h5><br>
                 @if (session('status'))
                     <div class="row"
                          style="margin: 20px;width: 100%;background-color: green;border: 1px solid darkgreen">

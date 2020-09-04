@@ -33,6 +33,11 @@
             </div>
             <div class="pr-1 mb-3 mb-xl-0">
                 <button type="button" class="btn btn-rounded btn-warning btn-icon-text">
+                    <a href="{{route('ages.index')}}">Age</a>
+                </button>
+            </div>
+            <div class="pr-1 mb-3 mb-xl-0">
+                <button type="button" class="btn btn-rounded btn-warning btn-icon-text">
 
                     <a href="{{route('users.index')}}">Users</a>
 

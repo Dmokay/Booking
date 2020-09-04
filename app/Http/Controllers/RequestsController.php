@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Age;
 use App\Booking;
 use App\Helpers\Helper;
 use App\Service;
@@ -40,8 +41,9 @@ class RequestsController extends Controller
      */
     public function create()
     {
+        $age = Age::find(1);
         $services = Service::where('status', true)->orderBy('when')->get();
-        return view('Request.request-attendance', compact('services'));
+        return view('Request.request-attendance', compact('services', 'age'));
     }
 
     /**

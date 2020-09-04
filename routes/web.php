@@ -32,4 +32,5 @@ Route::group(['middleware' => ['auth']], function () {
     Route::resource('/requests', 'RequestsController');
     Route::resource('/services', 'ServicesController');
     Route::resource('/users', 'UsersController');
+    Route::resource('/ages', 'AgesController');
 });
